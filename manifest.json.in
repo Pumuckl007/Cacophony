@@ -1,0 +1,17 @@
+{
+    "name": "cacophony.007pumuckl",
+    "description": "description of Cacophony",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Cacophony",
+    "hooks": {
+        "Cacophony": {
+            "apparmor": "Cacophony/Cacophony.apparmor",
+            "desktop":  "Cacophony/Cacophony.desktop"
+        }
+    },
+    "version": "0.1",
+    "maintainer": "Maximilian Apodaca <maximilian.paulsen@gmail.com>",
+    "framework" : "ubuntu-sdk-15.04.4"
+}
+
+

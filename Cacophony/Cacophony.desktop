@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Cacophony
+Exec=qmlscene %U Cacophony/Main.qml
+Icon=Cacophony/Cacophony.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+
