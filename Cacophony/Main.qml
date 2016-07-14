@@ -2,7 +2,6 @@ import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Qt.WebSockets 1.0
 import Ubuntu.Components.Popups 1.3
-import QtSystemInfo 5.0
 import "DiscordInterface.js" as Discord
 
 /*!
@@ -19,10 +18,6 @@ MainView {
 
     width: units.gu(100)
     height: units.gu(75)
-
-    DeviceInfo{
-        id: devInfo
-    }
 
     Page {
         header: PageHeader {
@@ -44,20 +39,20 @@ MainView {
                 topMargin: units.gu(2)
             }
 
-            text: i18n.tr("Hello..")
+            text: ""
         }
 
         Component {
              id: dialog
              Dialog {
                  id: dialogue
-                 title: "Websocket Ready!"
+                 title: "Connection Ready!"
                  text: "Send a message now?"
                  Button {
                      text: "Sure"
                      onClicked: {
                          PopupUtils.close(dialogue)
-                         gatewayWebsocket.sendTextMessage("A Message");
+                         Discord.sendMessageToCurrentChannel("Hello Channel");
                      }
                  }
                  Button {
@@ -81,9 +76,23 @@ MainView {
             width: parent.width
             text: i18n.tr("Send Message!")
             onClicked: {
-                Discord.init(mainView, devInfo);
+                Discord.sendMessageToCurrentChannel("HI?");
             }
         }
+    }
+
+    function done(){
+        PopupUtils.open(dialog);
+    }
+
+    function message(event, object){
+        label.text += "<" + object.author.username + "> " + object.content + "\n";
+    }
+
+    Component.onCompleted: {
+        Discord.init(mainView);
+        Discord.addEventListener(Discord.CHANGE_CHANNEL, done);
+        Discord.addEventListener(Discord.MESSAGE_CREATED, message);
     }
 }
 
