@@ -35,5 +35,10 @@ INSTALLS+=config_files qml_files desktop_file
 
 DISTFILES += \
     DiscordInterface.js \
-    Websocket.qml
+    Websocket.qml \
+    ChatMessageDisplay.qml \
+    ChatPage.qml \
+    FriendDisplay.qml \
+    ServerDisplay.qml \
+    FriendsAndServers.qml
 

@@ -10,13 +10,13 @@ var MESSAGE_CREATED = "MESSAGE_CREATED";
 var token = "";
 var websocket;
 var websocketParrent;
-var deviceInfo;
 var heartbeatTimer;
 var seqs = "";
 var user;
 var channels = [];
 var currentChannel;
 var listeners = [];
+var lastTypeingTime = 0;
 
 
 var setWebsocket = function(websocket){
@@ -25,8 +25,7 @@ var setWebsocket = function(websocket){
     number ++;
 }
 
-var init = function(parrent, devInfo){
-    deviceInfo = devInfo;
+var init = function(parrent){
     getGateway(initContinue1);
     websocketParrent = parrent;
 }
@@ -140,7 +139,7 @@ var handleEvent = function(object){
 var aPIRequest = function(type, url, callback){
     var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.onreadystatechange=function() {
+    xmlhttp.onreadystatechange=function(error) {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             if(callback && typeof callback === 'function')
                 callback(xmlhttp.responseText);
@@ -167,11 +166,19 @@ var makeMessage = function(message){
 }
 
 var sendMessage = function(message, channel){
-    aPIRequest('post', "https://discordapp.com/api/channels/" + channel + "/messages", message);
+    aPIRequest('post', BASE_URL + "/channels/" + channel + "/messages", message);
 }
 
 var sendMessageToCurrentChannel = function(message){
     sendMessage(message, currentChannel.id);
+}
+
+var setTypeing = function(){
+    var time = Date.now();
+    if(time - 5000 > lastTypeingTime){
+        lastTypeingTime = time;
+        aPIRequest('post', BASE_URL + "/channels/" + currentChannel.id + "/typing", null);
+    }
 }
 
 var addEventListener = function(event, func){
