@@ -4,15 +4,49 @@ import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Page {
+    property string channelName : i18n.tr("Untitled");
     id: mainPage
     header: PageHeader {
         id: pageHeader
-        title: i18n.tr("Cacophony")
+        title: channelName
         StyleHints {
             foregroundColor: UbuntuColors.orange
             backgroundColor: UbuntuColors.porcelain
             dividerColor: UbuntuColors.slate
         }
+        trailingActionBar.actions: [
+            Action {
+                id:voiceChannels
+                iconSource: "DownCaret.svg"
+                text: i18n.tr("Voice Channels");
+            },
+
+            Action {
+                id:silence
+                iconName:"speaker";
+                text: i18n.tr("Silence")
+                onTriggered: {
+                    if(silence.iconName === "speaker"){
+                        silence.iconName = "speaker-mute"
+                    } else {
+                        silence.iconName = "speaker";
+                    }
+                }
+            },
+            Action {
+                id:mute
+                iconName:"microphone";
+                text: i18n.tr("Mute")
+                onTriggered: {
+                    if(mute.iconName === "microphone"){
+                        mute.iconName = "microphone-mute"
+                    } else {
+                        mute.iconName = "microphone";
+                    }
+                }
+            }
+
+        ]
     }
 
     UbuntuListView{
@@ -54,7 +88,6 @@ Page {
         anchors {
             right: parent.right
             bottom: parent.bottom
-            bottomMargin: units.gu(4)
         }
         width: units.gu(8)
         text: i18n.tr("Send")
@@ -72,7 +105,6 @@ Page {
         anchors {
             left: parent.left
             bottom: parent.bottom
-            bottomMargin: units.gu(4)
             right: send.left
         }
         height: units.gu(3);
@@ -81,7 +113,6 @@ Page {
             message.text = "";
         }
         onTextChanged: {
-            console.log(discord());
             discord().setTypeing();
         }
     }

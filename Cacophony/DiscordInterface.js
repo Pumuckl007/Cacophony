@@ -6,6 +6,8 @@ var GATEWAY_VERSION = 5.0;
 var CHANGE_CHANNEL = "CHANGE_GUILD";
 //Fired when a message is created. Event contains message object.
 var MESSAGE_CREATED = "MESSAGE_CREATED";
+//Fired when a guild is added
+var NEW_GUILD = "NEW_GUILD"
 
 var token = "";
 var websocket;
@@ -13,10 +15,11 @@ var websocketParrent;
 var heartbeatTimer;
 var seqs = "";
 var user;
-var channels = [];
+var channelsMap = [];
 var currentChannel;
 var listeners = [];
 var lastTypeingTime = 0;
+var guilds = [];
 
 
 var setWebsocket = function(websocket){

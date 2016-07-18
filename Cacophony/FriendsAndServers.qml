@@ -16,26 +16,34 @@ Page {
     }
 
     UbuntuListView{
-        id: channelsView
+        id: serversView
         anchors.top: yourStatusHeader.bottom
         anchors.left: parent.left
         width: units.gu(10)
         anchors.bottom: parent.bottom
-        verticalLayoutDirection: ListView.TopToBottom
         clip: true
         spacing: units.gu(1)
 
         model: ListModel{
-            id: channelsModel
+            id: serversModel
         }
         delegate: ServerDisplay { }
 
     }
 
+    Rectangle {
+        id: divider
+        color: UbuntuColors.lightGrey;
+        anchors.top: yourStatusHeader.bottom
+        anchors.left: serversView.right
+        width: 1
+        anchors.bottom: parent.bottom
+    }
+
     UbuntuListView{
         id: friendsView
         anchors.top: yourStatusHeader.bottom
-        anchors.left: channelsView.right
+        anchors.left: divider.right
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         clip: true
@@ -50,7 +58,7 @@ Page {
             for(var i = 0; i<40; i++){
                 var string = "Mr. " + Math.random();
                 friendsModel.append({name:string});
-                channelsModel.append({name: "ID: " + i});
+                serversModel.append({name: "ID: " + i});
             }
         }
     }

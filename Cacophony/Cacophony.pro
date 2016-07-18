@@ -7,7 +7,8 @@ QML_FILES += $$files(*.qml,true) \
              $$files(*.js,true)
 
 CONF_FILES +=  Cacophony.apparmor \
-               Cacophony.png
+               Cacophony.png \
+               DownCaret.svg
 
 AP_TEST_FILES += tests/autopilot/run \
                  $$files(tests/*.py,true)               
@@ -40,5 +41,10 @@ DISTFILES += \
     ChatPage.qml \
     FriendDisplay.qml \
     ServerDisplay.qml \
-    FriendsAndServers.qml
+    FriendsAndServers.qml \
+    Server.qml \
+    ChannelDisplay.qml \
+    NewChannel.qml \
+    ServerUsers.qml \
+    VoiceChannels.qml
 

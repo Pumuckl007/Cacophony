@@ -26,13 +26,13 @@ ListItem {
           },
           Action {
               iconName: "info";
-              property color color: "red";
+              property color color: UbuntuColors.red;
               property color iconColor: "white"
               property color iconColorPressed: "grey"
           }
         ]
         delegate: Item {
-            width: units.gu(5);
+            width: units.gu(6);
             Rectangle {
                 color: action.color ? action.color : "black";
                 visible: action.color ? true : false
