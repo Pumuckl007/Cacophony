@@ -10,7 +10,7 @@ ListItem {
   Text {
     height: units.gu(4);
     id: userNameLabel
-    text: name + ""
+    text: username + ""
     font.weight: Font.Bold;
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
@@ -23,6 +23,9 @@ ListItem {
         actions: [
           Action {
               iconName: "message";
+              onTriggered: {
+                pageLayout.addPageToNextColumn((previousPage) ? previousPage : friendsAndServersPage, chatPage, {channelName: userNameLabel.text, shouldDisplayVoiceChannels: false})
+              }
           },
           Action {
               iconName: "info";

@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Ubuntu.Components 1.3
 
 Panel{
+    property variant model
     id: panel
     anchors {
         right: parent.right
@@ -110,6 +111,18 @@ Panel{
                 width: parent.width*9/20
                 text: i18n.tr("Create")
                 color: UbuntuColors.green
+                onClicked: {
+                    if(textChannelRect.selected){
+                        model.set(0, {name:channelName.text, type:"text", active:"false"})
+                    } else {
+                        model.append({name:channelName.text, type:"voice", active:"false"});
+                    }
+                    channelType.text = i18n.tr("Channel Type");
+                    textChannelRect.selected = false;
+                    voiceChannelRect.selected = false;
+                    channelName.text = "";
+                    panel.close();
+                }
             }
             Rectangle {
                 id: padding

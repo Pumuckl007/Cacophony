@@ -1,10 +1,12 @@
-import QtQuick 2.0
+import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3
 
 Page {
     property string channelName : i18n.tr("Untitled");
+    property string idOfChannel;
+    property bool shouldDisplayVoiceChannels : true;
     id: mainPage
     header: PageHeader {
         id: pageHeader
@@ -14,43 +16,51 @@ Page {
             backgroundColor: UbuntuColors.porcelain
             dividerColor: UbuntuColors.slate
         }
-        trailingActionBar.actions: [
-            Action {
-                id:voiceChannels
-                iconSource: "DownCaret.svg"
-                text: i18n.tr("Voice Channels");
-            },
-
-            Action {
-                id:silence
-                iconName:"speaker";
-                text: i18n.tr("Silence")
-                onTriggered: {
-                    if(silence.iconName === "speaker"){
-                        silence.iconName = "speaker-mute"
-                    } else {
-                        silence.iconName = "speaker";
-                    }
-                }
-            },
-            Action {
-                id:mute
-                iconName:"microphone";
-                text: i18n.tr("Mute")
-                onTriggered: {
-                    if(mute.iconName === "microphone"){
-                        mute.iconName = "microphone-mute"
-                    } else {
-                        mute.iconName = "microphone";
-                    }
-                }
-            }
-
-        ]
+        trailingActionBar.actions: (shouldDisplayVoiceChannels) ? [silence, mute] : []
     }
+
+    Action {
+        id:silence
+        iconName:"speaker";
+        text: i18n.tr("Silence")
+        onTriggered: {
+            if(silence.iconName === "speaker"){
+                silence.iconName = "speaker-mute"
+            } else {
+                silence.iconName = "speaker";
+            }
+        }
+    }
+    Action {
+        id:mute
+        iconName:"microphone";
+        text: i18n.tr("Mute")
+        onTriggered: {
+            if(mute.iconName === "microphone"){
+                mute.iconName = "microphone-mute"
+            } else {
+                mute.iconName = "microphone";
+            }
+        }
+    }
+
+    function reload(){
+        chatMessages.clear();
+        var messages = discord().messageMap[idOfChannel];
+        if(!messages)
+            return
+        for(var i = messages.length; i >= 0; i--){
+            chatMessages.append(messages[i]);
+        }
+        if(chatMessages.count < 10){
+            discord().loadMoreMessageForCurrentChannel();
+        }
+    }
+
 
     UbuntuListView{
         id: messageView
+        property bool refreshing : false
         anchors.top: pageHeader.bottom
         anchors.left: parent.left
         anchors.right: parent.right
@@ -64,22 +74,15 @@ Page {
         }
         delegate: ChatMessageDisplay { }
 
-    }
+        pullToRefresh {
+            enabled: true
+            refreshing: refreshing
+            onRefresh: {
+                discord().loadMoreMessageForCurrentChannel();
+                refreshing = true;
+            }
+        }
 
-    Component {
-         id: dialog
-         Dialog {
-             id: dialogue
-             title: "Connection Ready!"
-             text: "You may now send messages!"
-             Button {
-                 text: "Okay"
-                 color: UbuntuColors.orange
-                 onClicked: {
-                     PopupUtils.close(dialogue)
-                 }
-             }
-         }
     }
 
     Button {
@@ -119,11 +122,35 @@ Page {
 
     Component.onCompleted:{
         discord().addEventListener(discord().MESSAGE_CREATED, messageRecived);
-        messageRecived(null, {author:{username:"MEEEEEEEE"},content:"test"});
+        discord().addEventListener(discord().MORE_MESSAGE, moreMessages);
     }
 
     function messageRecived(event, object){
-        chatMessages.insert(0, {author:object.author, content: object.content});
+        if(object.channel_id === idOfChannel)
+            chatMessages.insert(0, object);
+    }
+
+    function moreMessages(event, channelId){
+        messageView.refreshing = false;
+        if(channelId === idOfChannel){
+            var messages = discord().messageMap[idOfChannel];
+            if(!messages)
+                return;
+            if(chatMessages.count > 0){
+                var lastMessageId = chatMessages.get(chatMessages.count-1).id;
+                var i = 0;
+                while(messages[i].id !== lastMessageId && i<messages.length){
+                    i++;
+                }
+                for(var k = i-1; k>=0; k--){
+                    chatMessages.append(messages[k]);
+                }
+            } else {
+                for(var i = messages.length-1; i >= 0; i--){
+                    chatMessages.append(messages[i]);
+                }
+            }
+        }
     }
 }
 

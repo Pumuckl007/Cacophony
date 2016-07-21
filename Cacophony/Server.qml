@@ -5,10 +5,11 @@ import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Page {
     property string serverName
+    property string serverId
     id: mainPage
     header: PageHeader {
         id: yourStatusHeader
-        title: i18n.tr("Server:") + serverName
+        title: serverName
         StyleHints {
             foregroundColor: UbuntuColors.orange
             backgroundColor: UbuntuColors.porcelain
@@ -43,11 +44,28 @@ Page {
                 iconName:"info";
                 text: i18n.tr("Info")
                 onTriggered: {
-                    pageLayout.addPageToNextColumn(serverPage ,serverUsersPage, {serverName: serverName});
+                    pageLayout.addPageToNextColumn(serverPage ,serverUsersPage, {serverName: serverName, serverId: serverId});
+                    serverUsersPage.updateFriendModel();
                 }
             }
 
         ]
+    }
+
+    function updateChannelsModel(event, checkServerId){
+        if(checkServerId && serverId !== checkServerId)
+            return;
+        console.log("Server id" + serverId);
+        channelsModel.clear();
+        channelsModel.append({type:"devider"});
+        var channels = discord().channelsMap[serverId];
+        for(var i = 0; i<channels.length; i++){
+            if(channels[i].type === "text"){
+                channelsModel.insert(0, channels[i]);
+            } else {
+                channelsModel.append(channels[i]);
+            }
+        }
     }
 
     Rectangle {
@@ -69,11 +87,9 @@ Page {
             delegate: ChannelDisplay {}
 
             Component.onCompleted: {
-                var max = Math.random()*100;
-                for(var i = 0; i<max; i++){
-                    var string = "Channel " + i;
-                    channelsModel.append({name:string});
-                }
+                //Need to add the variables used here or else list elements won't be able to accsses them
+                channelsModel.append({type:"devider", name:"null", id:"-1"});
+                discord().addEventListener(discord().SERVER_CHANNELS,updateChannelsModel);
             }
         }
 
@@ -85,6 +101,7 @@ Page {
 
         NewChannel{
             id: newChannel
+            model: channelsModel
         }
     }
 

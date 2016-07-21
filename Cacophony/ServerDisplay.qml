@@ -10,7 +10,8 @@ ListItem {
   divider.visible: false
 
   onClicked : {
-    pageLayout.addPageToNextColumn(friendsAndServersPage, serverPage, {serverName: name});
+      pageLayout.addPageToNextColumn(friendsAndServersPage, serverPage, {serverName: name, serverId: id});
+      serverPage.updateChannelsModel()
   }
 
   Text {

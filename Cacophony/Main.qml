@@ -37,6 +37,10 @@ MainView {
         ServerUsers {
             id: serverUsersPage
         }
+
+        VoiceChannel {
+            id: voiceChannelPage;
+        }
     }
 
     function discord(){
@@ -49,10 +53,8 @@ MainView {
 
 
     Component.onCompleted: {
-        //Discord.init(mainView);
-        Discord.addEventListener(Discord.CHANGE_CHANNEL, done);
-        pageLayout.addPageToNextColumn(friendsAndServersPage ,serverPage, {serverName: "My Server"});
-        pageLayout.addPageToNextColumn(serverPage ,serverUsersPage, {serverName: "MY SERVER"});
+        Discord.init(mainView);
+        //Discord.addEventListener(Discord.CHANGE_CHANNEL, done);
     }
 }
 

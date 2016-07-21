@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-17 20:56+0200\n"
+"POT-Creation-Date: 2016-07-21 21:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,29 +17,33 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChannelDisplay.qml:22
+msgid "Voice Channels"
+msgstr ""
+
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChannelDisplay.qml:22
+msgid "#"
+msgstr ""
+
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:7
 msgid "Untitled"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:21
-msgid "Voice Channels"
-msgstr ""
-
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:27
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:21
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:25
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:22
 msgid "Silence"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:39
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:33
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:37
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:34
 msgid "Mute"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:93
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:96
 msgid "Send"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:104
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:107
 msgid "Message"
 msgstr ""
 
@@ -47,44 +51,41 @@ msgstr ""
 msgid "Your Username"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:23
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:125
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:24
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:120
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:138
 msgid "Channel Type"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:41
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:42
 msgid "Text Channel"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:70
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:71
 msgid "Voice Channel"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:92
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:93
 msgid "Channel Name"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:111
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:112
 msgid "Create"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:123
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:136
 msgid "Cancle"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:11
-msgid "Server:"
-msgstr ""
-
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:44
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:45
 msgid "Info"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:82
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:98
 msgid "New Channel"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ServerUsers.qml:11
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ServerUsers.qml:12
 msgid " : Users"
 msgstr ""
 

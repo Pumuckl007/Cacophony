@@ -2,35 +2,50 @@ import QtQuick 2.0
 import Ubuntu.Components 1.3
 
 ListItem {
-  id: chatDisplay
+  id: channel
   width: parent.width;
   height:units.gu(4);
   color: UbuntuColors.porcelain
   onClicked: {
-      pageLayout.addPageToNextColumn(serverPage ,chatPage, {channelName: name});
+      if(type === "text"){
+        pageLayout.addPageToNextColumn(serverPage ,chatPage, {channelName: name, shouldDisplayVoiceChannels:true, idOfChannel:id});
+        discord().currentChannelId = id;
+        chatPage.reload();
+      }
+      else if(type === "voice")
+          selected = true
   }
 
   Text {
     height: units.gu(4);
-    id: userNameLabel
-    text: name + ""
-    font.weight: Font.Normal;
+    id: channelName
+    text: (type === "devider") ? i18n.tr("Voice Channels") : (type === "text") ? i18n.tr("#") + name : name
+    font.weight: (type === "devider") ? Font.Bold : (selected) ? Font.DemiBold : Font.Normal;
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
   }
 
   trailingActions: actions
 
+
   ListItemActions {
       id: actions;
-      actions: [
-        Action {
-            iconName: "delete";
-            property color color: UbuntuColors.red;
-            property color iconColor: "white"
-            property color iconColorPressed: "grey"
-        }
-      ]
+      Action {
+          id: deleteChannel
+          iconName: "delete";
+          property color color: UbuntuColors.red;
+          property color iconColor: "white"
+          property color iconColorPressed: "grey"
+      }
+      Action {
+          id: info
+          iconName: "info";
+          onTriggered: {
+              pageLayout.addPageToNextColumn(serverPage ,voiceChannelPage, {channelName: channelName.text});
+          }
+      }
+
+      actions: (type === "devider") ? [] : (type === "voice") ? [info, deleteChannel] : [deleteChannel]
       delegate: Item {
         width: units.gu(6);
         Rectangle {
@@ -52,4 +67,3 @@ ListItem {
       }
   }
 }
-

@@ -1,3 +1,4 @@
+.import QtQml 2.2 as QTQML
 var BASE_URL = "https://discordapp.com/api";
 var GATEWAY_VERSION = 5.0;
 
@@ -8,6 +9,14 @@ var CHANGE_CHANNEL = "CHANGE_GUILD";
 var MESSAGE_CREATED = "MESSAGE_CREATED";
 //Fired when a guild is added
 var NEW_GUILD = "NEW_GUILD"
+//Fired whenever an update to the user data occurs
+var USER_CHANGED = "USER_CHANGED"
+//Fired when a server's channels are fetched
+var SERVER_CHANNELS = "SERVER_CHANNELS"
+//Fired when the server users are recived
+var SERVER_USERS_UPDATED = "SERVER_USERS_UPDATED"
+//Fired when more message are recived in bulk
+var MORE_MESSAGE = "MORE_MESSAGES";
 
 var token = "";
 var websocket;
@@ -16,10 +25,11 @@ var heartbeatTimer;
 var seqs = "";
 var user;
 var channelsMap = [];
-var currentChannel;
+var currentChannelId;
 var listeners = [];
 var lastTypeingTime = 0;
 var guilds = [];
+var messageMap = [];
 
 
 var setWebsocket = function(websocket){
@@ -31,6 +41,7 @@ var setWebsocket = function(websocket){
 var init = function(parrent){
     getGateway(initContinue1);
     websocketParrent = parrent;
+    addEventListener(NEW_GUILD, newGuildQuerry);
 }
 
 var initContinue1 = function(url){
@@ -51,10 +62,10 @@ var getGateway = function(callback){
 
 var createWebsocket = function(url){
     var ws = Qt.createComponent("Websocket.qml");
-    if(ws.status === Component.Ready)
+    if(ws.status === QTQML.Component.Ready)
         ws = ws.createObject(websocketParrent, {url:url, active:true, stsChanged:{func: statusChanged}, txtRecived:{func: messageRecived}});
     else
-        console.log(ws.errorString());
+        console.log("Error: " + ws.errorString());
     return ws;
 }
 
@@ -94,12 +105,10 @@ var startHandshake = function(){
                 },
             }
         };
-    console.log(JSON.stringify(identity));
     websocket.sendTextMessage(JSON.stringify(identity));
 }
 
 var heartbeat = function(){
-    console.log("Heartbeat");
     var heartBeat = {
         "op": 1,
         "d": seqs
@@ -121,8 +130,18 @@ var handleEvent = function(object){
         heartbeatTimer.repeat = true;
         heartbeatTimer.start();
         user = object.d.user;
-        console.log(JSON.stringify(user));
+        fireEvent(USER_CHANGED, user);
+        aPIRequest('get', BASE_URL + "/users/@me/guilds", function(json){
+            console.log(json);
+            var newGuilds = JSON.parse(json);
+            for(var i = 0; i<newGuilds.length; i++){
+                handleEvent({t:"GUILD_CREATE", d:newGuilds[i]});
+            }
+        });
     } else if(object.t === "GUILD_CREATE"){
+        if(guilds[object.d.id])
+            return;
+        var channels = (channelsMap[object.d.id]) ? channelsMap[object.d.id] : []
         var notAdd = false;
         for(var i = 0; i<channels.length; i++){
             notAdd |= channels[i].id === object.d.id;
@@ -130,16 +149,24 @@ var handleEvent = function(object){
         if(!notAdd){
             channels.push(object.d);
         }
-        currentChannel = object.d;
-        fireEvent(CHANGE_CHANNEL, {channel: currentChannel.id});
+        guilds[object.d.id] = object.d;
+        currentChannelId = object.d.id;
+        fireEvent(CHANGE_CHANNEL, {channel: currentChannelId});
+        channelsMap[object.d.id] = channels;
+        fireEvent(NEW_GUILD, object.d);
     } else if(object.t === "MESSAGE_CREATE"){
         fireEvent(MESSAGE_CREATED, object.d);
+        if(messageMap[object.d.channel_id]){
+            messageMap[object.d.channel_id].push(object.d);
+        } else {
+            messageMap[object.d.channel_id] = [object.d];
+        }
     } else {
         console.log("Uncaught event " + object.t);
     }
 }
 
-var aPIRequest = function(type, url, callback){
+var aPIRequest = function(type, url, callback, fourth){
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange=function(error) {
@@ -155,7 +182,10 @@ var aPIRequest = function(type, url, callback){
         xmlhttp.setRequestHeader('authorization', (user ? (user.bot ? "Bot " : "") : "") + token);
     if(callback && typeof callback !== 'function')
         xmlhttp.send(makeMessage(callback));
-    else
+    else if(callback && fourth){
+        xmlhttp.send(makeMessage(fourth));
+        console.log(JSON.stringify(fourth));
+    } else
         xmlhttp.send();
 }
 
@@ -173,14 +203,52 @@ var sendMessage = function(message, channel){
 }
 
 var sendMessageToCurrentChannel = function(message){
-    sendMessage(message, currentChannel.id);
+    sendMessage(message, currentChannelId);
 }
 
 var setTypeing = function(){
     var time = Date.now();
     if(time - 5000 > lastTypeingTime){
         lastTypeingTime = time;
-        aPIRequest('post', BASE_URL + "/channels/" + currentChannel.id + "/typing", null);
+        aPIRequest('post', BASE_URL + "/channels/" + currentChannelId + "/typing", null);
+    }
+}
+
+var newGuildQuerry = function(event, guild){
+    aPIRequest('get', BASE_URL + "/guilds/" + guild.id + "/channels", function(json){
+            var channels = JSON.parse(json);
+            channelsMap[guild.id] = channels;
+            fireEvent(SERVER_CHANNELS, guild.id);
+        });
+    aPIRequest('get', BASE_URL + "/guilds/" + guild.id + "/members", function(json){
+        var users = JSON.parse(json);
+        console.log("JSON: " + json);
+        guilds[guild.id].users = users;
+        fireEvent(SERVER_USERS_UPDATED, guild.id);
+    }, {limit:1000});
+}
+
+var loadMoreMessageForCurrentChannel = function(){
+    var channelIdToUse = currentChannelId;
+    var firstId = (messageMap[currentChannelId]) ? messageMap[currentChannelId][0].id : false;
+    var callBack = function(json){
+        var messages = JSON.parse(json);
+        if(messages.length === 0){
+            fireEvent(MORE_MESSAGE, channelIdToUse);
+            return;
+        }
+        messages.reverse();
+        var previousMessage = messageMap[channelIdToUse];
+        if(previousMessage)
+            messageMap[channelIdToUse] = messages.concat(previousMessage);
+        else
+            messageMap[channelIdToUse] = messages;
+        fireEvent(MORE_MESSAGE, channelIdToUse);
+    }
+    if(firstId){
+        aPIRequest('get', BASE_URL + "/channels/" + currentChannelId + "/messages?before=" + firstId, callBack);
+    } else {
+        aPIRequest('get', BASE_URL + "/channels/" + currentChannelId + "/messages", callBack);
     }
 }
 
