@@ -7,6 +7,7 @@ Page {
     property string channelName : i18n.tr("Untitled");
     property string idOfChannel;
     property bool shouldDisplayVoiceChannels : true;
+    property var typingUsers : [];
     id: mainPage
     header: PageHeader {
         id: pageHeader
@@ -55,6 +56,8 @@ Page {
         if(chatMessages.count < 10){
             discord().loadMoreMessageForCurrentChannel();
         }
+        typeingUsers = [];
+        refreshTyping();
     }
 
 
@@ -64,7 +67,7 @@ Page {
         anchors.top: pageHeader.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: send.top
+        anchors.bottom: usersTyping.top
         verticalLayoutDirection: ListView.BottomToTop
         clip: true
         spacing: units.gu(1)
@@ -83,6 +86,17 @@ Page {
             }
         }
 
+    }
+
+    Text {
+        id: usersTyping
+        text: "No one"
+        anchors {
+            right: parent.right;
+            left: parent.left;
+            bottom: send.top
+        }
+        height: units.gu(2);
     }
 
     Button {
@@ -123,6 +137,8 @@ Page {
     Component.onCompleted:{
         discord().addEventListener(discord().MESSAGE_CREATED, messageRecived);
         discord().addEventListener(discord().MORE_MESSAGE, moreMessages);
+        discord().addEventListener(discord().TYPING_START, startTyping);
+        discord().addEventListener(discord().TYPING_STOP, endTyping);
     }
 
     function messageRecived(event, object){
@@ -151,6 +167,53 @@ Page {
                 }
             }
         }
+    }
+
+    function startTyping(event, info){
+        if(info.channel_id !== idOfChannel)
+            return
+        var users = discord().guilds[discord().serverMap[idOfChannel]].users;
+        for(var i = 0; i<users.length; i++){
+            if(users[i].user.id === info.user_id){
+                typingUsers.push([users[i].user.username, info.user_id]);
+                refreshTyping();
+                return;
+            }
+        }
+    }
+
+    function endTyping(event, user_id){
+        var indexToDelete = -1;
+        for(var i = 0; i<typingUsers.length; i++){
+            if(typingUsers[i][1] === user_id){
+                indexToDelete = i;
+                break;
+            }
+        }
+        if(indexToDelete !== -1){
+            typingUsers.splice(indexToDelete, indexToDelete+1);
+        }
+        refreshTyping();
+    }
+
+    function refreshTyping(){
+        var text = ""
+        if(typingUsers.length < 1){
+            usersTyping.text = text;
+            return;
+        }
+        if(typingUsers.length > 2){
+            var comma = i18n.tr(",");
+            for(var i = 0; i<typingUsers.length - 1; i++){
+               text += typingUsers[i][0] + comma + " ";
+            }
+            text += i18n.tr("and") + " " + typingUsers[i][0] + i18n.tr("are typing.");
+        } else if(typingUsers.length === 2){
+            text = typingUsers[0][0] + " " + i18n.tr("and") + " " + typingUsers[1][0] + " " + i18n.tr("are typing.");
+        } else {
+            text += typingUsers[0][0] + i18n.tr(" is typing.");
+        }
+        usersTyping.text = text;
     }
 }
 

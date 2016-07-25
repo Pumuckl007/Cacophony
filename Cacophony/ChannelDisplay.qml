@@ -9,7 +9,7 @@ ListItem {
   onClicked: {
       if(type === "text"){
         pageLayout.addPageToNextColumn(serverPage ,chatPage, {channelName: name, shouldDisplayVoiceChannels:true, idOfChannel:id});
-        discord().currentChannelId = id;
+        discord().setCurrentChannel(id);
         chatPage.reload();
       }
       else if(type === "voice")

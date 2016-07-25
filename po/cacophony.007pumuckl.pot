@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-21 21:43+0200\n"
+"POT-Creation-Date: 2016-07-24 15:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,22 +29,40 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:25
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:26
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:22
 msgid "Silence"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:37
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:38
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:34
 msgid "Mute"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:96
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:110
 msgid "Send"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:107
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:121
 msgid "Message"
+msgstr ""
+
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:206
+msgid ","
+msgstr ""
+
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:210
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:212
+msgid "and"
+msgstr ""
+
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:210
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:212
+msgid "are typing."
+msgstr ""
+
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:214
+msgid " is typing."
 msgstr ""
 
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/FriendsAndServers.qml:10
@@ -81,7 +99,7 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:98
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:97
 msgid "New Channel"
 msgstr ""
 

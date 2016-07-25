@@ -55,7 +55,6 @@ Page {
     function updateChannelsModel(event, checkServerId){
         if(checkServerId && serverId !== checkServerId)
             return;
-        console.log("Server id" + serverId);
         channelsModel.clear();
         channelsModel.append({type:"devider"});
         var channels = discord().channelsMap[serverId];

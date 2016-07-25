@@ -22,7 +22,11 @@ Page {
             var users = discord().guilds[serverId].users;
             friendsModel.clear();
             for(var i = 0; i<users.length; i++){
-                friendsModel.append(users[i].user);
+                var user = users[i].user
+                friendsModel.append({username: user.username,
+                                        id:user.id,
+                                        discriminator:user.discriminator,
+                                        previousPage: serverUsersPage});
             }
         }
     }

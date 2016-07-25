@@ -24,7 +24,8 @@ ListItem {
           Action {
               iconName: "message";
               onTriggered: {
-                pageLayout.addPageToNextColumn((previousPage) ? previousPage : friendsAndServersPage, chatPage, {channelName: userNameLabel.text, shouldDisplayVoiceChannels: false})
+                pageLayout.addPageToNextColumn((previousPage) ? previousPage : friendsAndServersPage, chatPage, {channelName: userNameLabel.text, shouldDisplayVoiceChannels: false});
+                discord().startDMWith(id);
               }
           },
           Action {

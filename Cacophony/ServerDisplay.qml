@@ -16,7 +16,16 @@ ListItem {
 
   Text {
     id: serverLabel
-    text: name
+    text: {
+        var strings = name.split(" ");
+        var returnString = ""
+        for(var i = 0; i<strings.length; i++){
+            if(strings[i].length > 0){
+                returnString += strings[i][0];
+            }
+        }
+        return returnString;
+    }
     width: parent.width
     font.weight: Font.Bold;
     horizontalAlignment: Text.AlignHCenter
