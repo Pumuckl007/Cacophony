@@ -47,17 +47,18 @@ Page {
 
     function reload(){
         chatMessages.clear();
+        typingUsers = [];
+        refreshTyping();
         var messages = discord().messageMap[idOfChannel];
         if(!messages)
             return
         for(var i = messages.length; i >= 0; i--){
-            chatMessages.append(messages[i]);
+            if(messages[i])
+                chatMessages.append(messages[i]);
         }
         if(chatMessages.count < 10){
             discord().loadMoreMessageForCurrentChannel();
         }
-        typeingUsers = [];
-        refreshTyping();
     }
 
 
@@ -172,6 +173,12 @@ Page {
     function startTyping(event, info){
         if(info.channel_id !== idOfChannel)
             return
+        if(discord().dMs[info.user_id]){
+            var channel = discord().dMs[info.user_id];
+            typingUsers.push([channel.recipient.username, channel.recipient.id]);
+            refreshTyping();
+            return;
+        }
         var users = discord().guilds[discord().serverMap[idOfChannel]].users;
         for(var i = 0; i<users.length; i++){
             if(users[i].user.id === info.user_id){

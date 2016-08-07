@@ -23,6 +23,8 @@ var DIRECT_MESSAGES_LOADED = "DIRECT_MESSAGES_LOADED";
 //Fired when typing starts/stops for user
 var TYPING_START = "TYPING_START";
 var TYPING_STOP = "TYPING_STOP";
+//Fired when DMs are added to or removed
+var DMS_CHANGED = "DMS_CHANGED";
 
 var token = "";
 var websocket;
@@ -38,13 +40,7 @@ var lastTypeingTime = 0;
 var guilds = [];
 var messageMap = [];
 var typeingMap = [];
-
-
-var setWebsocket = function(websocket){
-    websocket.active = true;
-    websocket.sendTextMessage("Echo, #" + number);
-    number ++;
-}
+var dMs = {};
 
 var init = function(parrent){
     getGateway(initContinue1);
@@ -59,14 +55,6 @@ var init = function(parrent){
 
 var initContinue1 = function(url){
     websocket = createWebsocket(JSON.parse(url).url);
-//    console.log(websocket.status);
-//    websocket.setProperty("onStatusChanged", function(){
-//        console.log(websocket.status);
-//    });
-
-//    for(var i in websocket){
-//        console.log("Websocket Propert: " + i);
-//    }
 }
 
 var getGateway = function(callback){
@@ -146,6 +134,7 @@ var handleEvent = function(object){
                 handleEvent({t:"GUILD_CREATE", d:newGuilds[i]});
             }
         });
+        getDMs();
     } else if(object.t === "GUILD_CREATE"){
         if(guilds[object.d.id])
             return;
@@ -181,6 +170,16 @@ var handleEvent = function(object){
     } else if(object.t === "GUILD_MEMBER_ADD"){
         guilds[serverMap[object.t.channel_id]].users.push(object.d);
         fireEvent(SERVER_USERS_UPDATED, serverMap[object.t.channel_id]);
+    } else if(object.t === "CHANNEL_CREATE"){
+        if(object.d.guild_id){
+            var channel = object.d;
+            if(channelsMap[channel.guild_id])
+                channelsMap[channel.guild_id].push(channel);
+            else
+                channelsMap[channel.guild_id] = [channel];
+            serverMap[channel.id] = channel.guild_id;
+            fireEvent(SERVER_CHANNELS, channel.guild_id);
+        }
     } else {
         console.log("Uncaught event " + object.t);
     }
@@ -200,9 +199,9 @@ var aPIRequest = function(type, url, callback, fourth){
     if(token)
         xmlhttp.setRequestHeader('authorization', (user ? (user.bot ? "Bot " : "") : "") + token);
     if(callback && typeof callback !== 'function')
-        xmlhttp.send(makeMessage(callback));
+        xmlhttp.send(JSON.stringify(callback));
     else if(callback && fourth){
-        xmlhttp.send(makeMessage(fourth));
+        xmlhttp.send(JSON.stringify(fourth));
     } else
         xmlhttp.send();
 }
@@ -213,11 +212,11 @@ var makeMessage = function(message){
         tts: false,
         nonce: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
     }
-    return JSON.stringify(msg);
+    return msg;
 }
 
 var sendMessage = function(message, channel){
-    aPIRequest('post', BASE_URL + "/channels/" + channel + "/messages", message);
+    aPIRequest('post', BASE_URL + "/channels/" + channel + "/messages", makeMessage(message));
 }
 
 var sendMessageToCurrentChannel = function(message){
@@ -252,6 +251,39 @@ var newGuildQuerry = function(event, guild){
 var setCurrentChannel = function(id){
     currentChannelId = id;
     fireEvent(CHANGE_CHANNEL, {channel: currentChannelId});
+}
+
+var getDMs = function(){
+    aPIRequest('get', BASE_URL + "/users/@me/channels", function(json){
+        var dmsArray = JSON.parse(json);
+        for(var i = 0; i<dmsArray.length; i++){
+            dMs[dmsArray[i].recipient.id] = dmsArray[i];
+        }
+        fireEvent(DMS_CHANGED, dMs);
+    });
+}
+
+var joinDM = function(userId, callback){
+    if(!dMs[userId]){
+        aPIRequest('post', BASE_URL + "/users/@me/channels", function(json){
+            var channel = JSON.parse(json);
+            dMs[channel.recipient.id] = channel;
+            callback(channel);
+            currentChannelId = channel.id;
+            loadMoreMessageForCurrentChannel();
+        }, {recipient_id: userId});
+    } else {
+        var channel = dMs[userId]
+        callback(channel);
+        currentChannelId = channel.id;
+        loadMoreMessageForCurrentChannel();
+    }
+}
+
+var newChannel = function(server, name, type, bitrate){
+    console.log(BASE_URL + "/guilds/" + server + "/channels");
+    aPIRequest('post', BASE_URL + "/guilds/" + server + "/channels",
+               {name: name, type:type, bitrate: (bitrate) ? bitrate : 64000});
 }
 
 var loadMoreMessageForCurrentChannel = function(){

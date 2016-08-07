@@ -4,6 +4,8 @@ import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import "DiscordInterface.js" as Discord
 
+import Cacophony 1.0 as Cacophony
+
 /*!
     \brief MainView with a Label and Button elements.
 */
@@ -16,6 +18,15 @@ MainView {
 
     width: units.gu(100)
     height: units.gu(75)
+
+    Cacophony.MyType {
+        id:myType
+
+    }
+
+    function update(){
+        console.log(myType.helloWorld)
+    }
 
     AdaptivePageLayout {
         id: pageLayout
@@ -53,7 +64,9 @@ MainView {
 
 
     Component.onCompleted: {
-        Discord.init(mainView);
+        myType.url = "";
+        console.log(myType.connect());
+        //Discord.init(mainView);
         //Discord.addEventListener(Discord.CHANGE_CHANNEL, done);
     }
 }

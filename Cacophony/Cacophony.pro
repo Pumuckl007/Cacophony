@@ -47,4 +47,3 @@ DISTFILES += \
     NewChannel.qml \
     ServerUsers.qml \
     VoiceChannel.qml
-

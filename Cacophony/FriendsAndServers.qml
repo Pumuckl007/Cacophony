@@ -62,6 +62,13 @@ Page {
         discord().addEventListener(discord().NEW_GUILD, function(event, server){
             serversModel.append({name: server.name, id:server.id});
         });
+        discord().addEventListener(discord().DMS_CHANGED, function(event){
+            friendsModel.clear();
+            var dMs = discord().dMs;
+            for(var i in dMs){
+                friendsModel.append(dMs[i].recipient);
+            }
+        })
     }
 }
 

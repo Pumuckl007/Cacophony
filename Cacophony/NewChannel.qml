@@ -110,18 +110,26 @@ Panel{
                 id: create
                 width: parent.width*9/20
                 text: i18n.tr("Create")
-                color: UbuntuColors.green
+                color: ready ? UbuntuColors.green : UbuntuColors.lightGrey
                 onClicked: {
-                    if(textChannelRect.selected){
-                        model.set(0, {name:channelName.text, type:"text", active:"false"})
-                    } else {
-                        model.append({name:channelName.text, type:"voice", active:"false"});
+                    if(ready){
+                        var type;
+                        if(textChannelRect.selected){
+                            type = "text";
+                        } else {
+                            type = "voice";
+                        }
+                        channelType.text = i18n.tr("Channel Type");
+                        textChannelRect.selected = false;
+                        voiceChannelRect.selected = false;
+                        discord().newChannel(serverId, channelName.text, type);
+                        channelName.text = "";
+                        panel.close();
                     }
-                    channelType.text = i18n.tr("Channel Type");
-                    textChannelRect.selected = false;
-                    voiceChannelRect.selected = false;
-                    channelName.text = "";
-                    panel.close();
+                }
+                property bool ready : {
+                    var length = channelName.text.length;
+                    return (textChannelRect.selected || voiceChannelRect.selected) && (length >= 2 && length <= 100)
                 }
             }
             Rectangle {

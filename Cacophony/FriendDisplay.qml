@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Ubuntu.Components 1.3
 
 ListItem {
+  property variant previousPage : false;
   id: chatDisplay
   width: parent.width;
   height:units.gu(4);
@@ -16,18 +17,24 @@ ListItem {
     verticalAlignment: Text.AlignVCenter
   }
 
+  MouseArea {
+      anchors.fill: parent;
+      onClicked: {
+          pageLayout.addPageToNextColumn((previousPage) ? previousPage : friendsAndServersPage, chatPage, {channelName: userNameLabel.text, shouldDisplayVoiceChannels: false});
+          discord().joinDM(id, function(channel){
+              chatPage.idOfChannel = channel.id + "";
+              chatPage.reload();
+          });
+      }
+      onPressed: chatDisplay.color = UbuntuColors.lightGrey;
+      onReleased: chatDisplay.color = UbuntuColors.porcelain;
+  }
+
   trailingActions: actions
 
   ListItemActions {
       id: actions;
         actions: [
-          Action {
-              iconName: "message";
-              onTriggered: {
-                pageLayout.addPageToNextColumn((previousPage) ? previousPage : friendsAndServersPage, chatPage, {channelName: userNameLabel.text, shouldDisplayVoiceChannels: false});
-                discord().startDMWith(id);
-              }
-          },
           Action {
               iconName: "info";
               property color color: UbuntuColors.red;

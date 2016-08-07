@@ -6,7 +6,8 @@ TEMPLATE = subdirs
 #load Ubuntu specific features
 load(ubuntu-click)
 
-SUBDIRS += Cacophony
+SUBDIRS += Cacophony \
+           backend/Cacophony
 
 # specify the manifest file, this file is required for click
 # packaging and for the IDE to create runconfigurations
@@ -23,6 +24,8 @@ UBUNTU_TRANSLATION_DOMAIN="cacophony.007pumuckl"
 UBUNTU_TRANSLATION_SOURCES+= \
     $$files(*.qml,true) \
     $$files(*.js,true) \
+    $$files(*.cpp,true) \
+    $$files(*.h,true) \
     $$files(*.desktop,true)
 
 # specifies all translations files and makes sure they are
@@ -39,3 +42,7 @@ unittest.depends  = sub-Cacophony
 
 QMAKE_EXTRA_TARGETS += aptest unittest
 
+LIBS += -L$$PWD/3rdparty/opus/lib/ -lopus
+
+INCLUDEPATH += $$PWD/3rdparty/opus/include
+DEPENDPATH += $$PWD/3rdparty/opus/include

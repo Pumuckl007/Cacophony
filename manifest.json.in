@@ -6,12 +6,10 @@
     "hooks": {
         "Cacophony": {
             "apparmor": "Cacophony/Cacophony.apparmor",
-            "desktop":  "Cacophony/Cacophony.desktop"
+            "desktop": "Cacophony/Cacophony.desktop"
         }
     },
     "version": "0.1",
     "maintainer": "Maximilian Apodaca <maximilian.paulsen@gmail.com>",
-    "framework" : "ubuntu-sdk-15.04.4"
+    "framework": "ubuntu-sdk-15.04.6"
 }
-
-
