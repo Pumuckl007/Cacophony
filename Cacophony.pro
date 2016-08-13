@@ -46,3 +46,8 @@ LIBS += -L$$PWD/3rdparty/opus/lib/ -lopus
 
 INCLUDEPATH += $$PWD/3rdparty/opus/include
 DEPENDPATH += $$PWD/3rdparty/opus/include
+
+LIBS += -L$$PWD/3rdparty/sodium/lib/ -lsodium
+
+INCLUDEPATH += $$PWD/3rdparty/sodium/include
+DEPENDPATH += $$PWD/3rdparty/sodium/include

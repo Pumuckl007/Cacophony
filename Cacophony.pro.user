@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.5.1, 2016-08-05T18:06:24. -->
+<!-- Written by QtCreator 3.5.1, 2016-08-10T23:43:00. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -400,8 +400,8 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">UbuntuProjectManager.UploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
        <value type="QString">/home/max/src/ubuntuApps/build-Cacophony-Ubuntu_Device_GCC_armhf_ubuntu_sdk_15_04_vivid-Release/cacophony.007pumuckl_0.1_armhf.click</value>
-       <value type="QString">/usr/ubuntu-sdk-ide/share/qtcreator/ubuntu/scripts/qtc_device_applaunch.py</value>
        <value type="QString">/home/max/src/ubuntuApps/build-Cacophony-Ubuntu_Device_GCC_armhf_ubuntu_sdk_15_04_vivid-Debug/cacophony.007pumuckl_0.1_armhf.click</value>
+       <value type="QString">/usr/ubuntu-sdk-ide/share/qtcreator/ubuntu/scripts/qtc_device_applaunch.py</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
        <value type="QString">127.0.0.1</value>

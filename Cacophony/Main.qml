@@ -64,8 +64,7 @@ MainView {
 
 
     Component.onCompleted: {
-        myType.url = "";
-        console.log(myType.connect());
+        myType.connect();
         //Discord.init(mainView);
         //Discord.addEventListener(Discord.CHANGE_CHANNEL, done);
     }

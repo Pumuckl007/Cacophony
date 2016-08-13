@@ -3,9 +3,12 @@
 
 #include <QObject>
 #include <QBuffer>
+#include <QFile>
+#include <QTimer>
 #include <QAudioInput>
 #include <QAudioDeviceInfo>
 #include <opus.h>
+#include <sodium.h>
 
 
 class MyType : public QObject
@@ -31,6 +34,15 @@ protected:
     QAudioInput *m_audioInput;
     OpusEncoder *encoder;
     QBuffer *m_audioData;
+    bool m_initilized;
+    int makePacket(char* input, char* output, const unsigned char *key, int inputLength);
+    unsigned char header[12];
+    int m_sequence;
+    unsigned char m_ssrc[4];
+    QFile theOutput;
+    unsigned char key[crypto_secretbox_KEYBYTES];
+    unsigned long m_readLocation;
+    QTimer *m_timer;
 };
 
 

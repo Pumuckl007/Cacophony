@@ -3,9 +3,11 @@
 #include <string>
 #include <iostream>
 #include <QTimer>
-#include <opus.h>
 #include <string.h>
 #include <QFile>
+
+#define FRAME_SIZE 1920
+#define MAX_PACKET_SIZE (3*1276)
 
 using namespace std;
 
@@ -13,7 +15,11 @@ MyType::MyType(QObject *parent) :
     QObject(parent),
     m_active(false),
     m_devInfo(QAudioDeviceInfo::defaultInputDevice()),
-    m_audioData(new QBuffer())
+    m_audioData(new QBuffer()),
+    m_initilized(false),
+    m_sequence(0),
+    theOutput("/tmp/output.opus"),
+    m_readLocation(0)
 {
 
 }
@@ -33,36 +39,24 @@ void MyType::setConnectionURL(QString url)
 
 void MyType::connect()
 {
+    theOutput.open(QBuffer::WriteOnly);
     m_audioData->open(QBuffer::ReadWrite);
+    randombytes_buf(key, sizeof key);
     QAudioFormat format;
     format.setSampleRate(48000);
     format.setChannelCount(2);
     format.setSampleSize(8);
-    format.setCodec("audio/opus");
+    format.setCodec("audio/pcm");
     format.setByteOrder(QAudioFormat::LittleEndian);
     format.setSampleType(QAudioFormat::UnSignedInt);
     if(m_devInfo.isFormatSupported(format)){
         cout << "Format " << format.codec().toStdString() << " is supported";
         m_audioInput = new QAudioInput(format, this);
         cout << "Format is " << m_audioInput->format().codec().toStdString() << "\n";
-        QTimer::singleShot(1000, this, SLOT(stopRecording()));
-
-        //Opus Setup
-        int err;
-        encoder = opus_encoder_create(format.sampleRate(), format.channelCount(), OPUS_APPLICATION_AUDIO, &err);
-        if (err<0)
-        {
-           cout << "failed to create an encoder: " << opus_strerror(err) << "\n";
-           return;
-        }
-        err = opus_encoder_ctl(encoder, OPUS_SET_BITRATE(64000));
-        if (err<0)
-        {
-            cout << "failed to set bitrate: " << opus_strerror(err) << "\n";
-            return;
-        }
-        //QObject::connect(m_audioInput, SIGNAL(notify()), this, SLOT(encode()));
-        //m_audioInput->setNotifyInterval(50);
+        m_timer = new QTimer(this);
+        QTimer::connect(m_timer, SIGNAL(timeout()), this, SLOT(encode()));
+        m_timer->start(70);
+        QTimer::singleShot(30000, this, SLOT(stopRecording()));
         m_audioInput->start(m_audioData);
     } else {
         cout << "Format " << format.codec().toStdString() << " is not supported";
@@ -70,41 +64,100 @@ void MyType::connect()
 
 }
 
-void MyType::encode(){
-    QFile file("/tmp/recording.opus");
-    file.open(QIODevice::WriteOnly);
-    int read = 0;
-    int size = 0;
-    char * in = new char[2048];
-    opus_int16 data[2048];
-    unsigned char output[2048];
-    char converterAgain[2048];
-    while(read < m_audioData->size()){
-        m_audioData->seek(read);
-        m_audioData->read(in, 2048);
-        for(int i = 0; i<2048; i++){
-            data[i] = (opus_int16)in[i];
+int MyType::makePacket(char* input, char* output, const unsigned char *key, int inputLength){
+    if(!m_initilized){
+        //Sodium setup
+        if(sodium_init() < 0){
+            cout << "Something went really wrong with sodium intilazation!\n";
+            return -1;
         }
-        size = (m_audioData->size()-read > 2048) ? 2048 : m_audioData->size()-read;
-        if(size == 2048){
-            int returnCode = opus_encode(encoder, data, 480, output, 2048);
-            const char* error = opus_strerror(returnCode);
-            cout << error;
-            for(int k = 0; k<2048; k++){
-                converterAgain[k] = (char) output[k];
-            }
-            file.write(converterAgain, size);
+
+        //Opus Setup
+        int err;
+        encoder = opus_encoder_create(48000, 2, OPUS_APPLICATION_VOIP, &err);
+        opus_encoder_ctl(encoder, OPUS_SET_BITRATE((opus_int32) 64000));
+        if (err<0)
+        {
+           cout << "failed to create an encoder: " << opus_strerror(err) << "\n";
+           return -1;
         }
-        read += 2048;
+
+        //Header Setup
+        header[0] = 0x80;
+        header[1] = 0x78;
+        for(int i = 2; i<12; i++){
+            header[i] = 0;
+        }
+        randombytes_buf(m_ssrc, sizeof m_ssrc);
+        for(int i = 0; i<4; i++){
+            header[i+8] = m_ssrc[i];
+        }
+        m_initilized = true;
     }
-    cout << "encode! " << m_audioData->size() << "\n";
+    header[2] = m_sequence >> 8;
+    header[3] = m_sequence;
+    unsigned int time = (960*m_sequence);
+    for(int i = 0; i<4; i++){
+        header[7-i] = time;
+        time = time >> 8;
+    }
+    m_sequence++;
+    unsigned char nonce[24];
+    for(int i = 0; i<12; i++){
+        nonce[i] = header[i];
+        nonce[i+12] = 0;
+    }
+    unsigned char encoded[MAX_PACKET_SIZE + crypto_secretbox_MACBYTES];
+
+    opus_int16 preEncoded[inputLength];
+    for(int i = 0; i<inputLength; i++){
+        preEncoded[i] = (opus_int16)input[i];
+    }
+
+    int compressedLength = opus_encode(encoder, preEncoded, inputLength/4, encoded, MAX_PACKET_SIZE);
+
+    if(compressedLength < 0){
+        cout << opus_strerror(compressedLength);
+        return compressedLength;
+    }
+
+    unsigned char outputUnsigned[compressedLength + crypto_secretbox_MACBYTES];
+
+    crypto_secretbox_easy(outputUnsigned, encoded, compressedLength, nonce, key);
+
+    for(unsigned int i = 0; i<compressedLength + crypto_secretbox_MACBYTES; i++){
+        output[i] = (char) outputUnsigned[i];
+    }
+
+    return compressedLength + crypto_secretbox_MACBYTES;
+}
+
+void MyType::encode(){
+    char* inputChars = new char[FRAME_SIZE*4];
+    char outputChars[MAX_PACKET_SIZE + crypto_secretbox_MACBYTES];
+    int inputLength = -1;
+    int size = m_audioData->size();
+    while(m_readLocation < size-FRAME_SIZE*4){
+        m_audioData->seek(m_readLocation);
+        inputLength = m_audioData->read(inputChars, FRAME_SIZE*4);
+        if(inputLength < FRAME_SIZE*4){
+            cout << inputLength << "\n";
+            break;
+        }
+        int packetSize = makePacket(inputChars, outputChars, key, inputLength);
+        if(packetSize > -1)
+            theOutput.write(outputChars, packetSize);
+        m_readLocation += FRAME_SIZE*4;
+    }
 }
 
 void MyType::stopRecording()
 {
+    m_timer->stop();
     encode();
     m_audioInput->stop();
     m_audioData->close();
+    theOutput.close();
     delete m_audioInput;
 }
 
