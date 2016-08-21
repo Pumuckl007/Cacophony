@@ -19,9 +19,8 @@ MainView {
     width: units.gu(100)
     height: units.gu(75)
 
-    Cacophony.MyType {
-        id:myType
-
+    Cacophony.VoiceConnection {
+        id:voiceConnection
     }
 
     function update(){
@@ -62,10 +61,21 @@ MainView {
         PopupUtils.open(dialog);
     }
 
+    Timer{
+        interval: 100;
+        repeat: false;
+        onTriggered: {
+            voiceConnection.connectAndDiscover();
+        }
+        running: false;
+    }
 
     Component.onCompleted: {
-        myType.connect();
-        //Discord.init(mainView);
+        //myType.encodeDecodeTest();
+        //voiceConnection.ssrc = 10;
+        //voiceConnection.port= 39338;
+        //voiceConnection.url = "example.com";
+        Discord.init(mainView, voiceConnection);
         //Discord.addEventListener(Discord.CHANGE_CHANNEL, done);
     }
 }

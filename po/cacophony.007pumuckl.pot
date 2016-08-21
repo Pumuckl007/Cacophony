@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-13 18:03+0200\n"
+"POT-Creation-Date: 2016-08-21 12:25-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChannelDisplay.qml:22
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChannelDisplay.qml:24
 msgid "Voice Channels"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChannelDisplay.qml:22
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChannelDisplay.qml:24
 msgid "#"
 msgstr ""
 
@@ -30,9 +30,7 @@ msgid "Untitled"
 msgstr ""
 
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:26
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:22
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:28
-msgid "Silence"
+msgid "Deafen"
 msgstr ""
 
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:38
@@ -95,6 +93,11 @@ msgstr ""
 
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/NewChannel.qml:144
 msgid "Cancle"
+msgstr ""
+
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:22
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:28
+msgid "Silence"
 msgstr ""
 
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:45

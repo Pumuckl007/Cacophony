@@ -12,8 +12,10 @@ ListItem {
         discord().setCurrentChannel(id);
         chatPage.reload();
       }
-      else if(type === "voice")
-          selected = true
+      else if(type === "voice"){
+          selected = true;
+          discord().joinVoiceChannel(id);
+      }
   }
 
   Text {

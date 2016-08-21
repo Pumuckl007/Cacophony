@@ -23,7 +23,7 @@ Page {
     Action {
         id:silence
         iconName:"speaker";
-        text: i18n.tr("Silence")
+        text: i18n.tr("Deafen")
         onTriggered: {
             if(silence.iconName === "speaker"){
                 silence.iconName = "speaker-mute"

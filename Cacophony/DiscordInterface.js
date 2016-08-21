@@ -41,8 +41,10 @@ var guilds = [];
 var messageMap = [];
 var typeingMap = [];
 var dMs = {};
+var currentVoiceConnection;
+var voiceUDPConnection;
 
-var init = function(parrent){
+var init = function(parrent, voiceUDP){
     getGateway(initContinue1);
     websocketParrent = parrent;
     addEventListener(NEW_GUILD, newGuildQuerry);
@@ -51,6 +53,15 @@ var init = function(parrent){
     typingTimer.interval = TYPING_TIMER_INTERVAL;
     typingTimer.repeat = true;
     typingTimer.start();
+    voiceUDPConnection = voiceUDP;
+    voiceConnection.dNSFinished.connect(function(){
+        voiceConnection.connectAndDiscover();
+    });
+    voiceConnection.discoveryFinished.connect(function(){
+        if(currentVoiceConnection){
+            currentVoiceConnection.discoveryFinished();
+        }
+    })
 }
 
 var initContinue1 = function(url){
@@ -61,10 +72,14 @@ var getGateway = function(callback){
     aPIRequest("GET", BASE_URL + "/gateway", callback);
 }
 
-var createWebsocket = function(url){
+var createWebsocket = function(url, stsChanged, msgRecived){
     var ws = Qt.createComponent("Websocket.qml");
     if(ws.status === QTQML.Component.Ready)
-        ws = ws.createObject(websocketParrent, {url:url + "/?encoding=json&v=6", active:true, stsChanged:{func: statusChanged}, txtRecived:{func: messageRecived}});
+        if(stsChanged){
+            ws = ws.createObject(websocketParrent, {url:url, active:true, stsChanged:{func: stsChanged}, txtRecived:{func: msgRecived}});
+        }else{
+            ws = ws.createObject(websocketParrent, {url:url + "/?encoding=json&v=6", active:true, stsChanged:{func: statusChanged}, txtRecived:{func: messageRecived}});
+        }
     else
         console.log("Error: " + ws.errorString());
     return ws;
@@ -81,9 +96,21 @@ var messageRecived = function(message){
         heartbeatTimer.interval = msg.d.heartbeat_interval;
         heartbeatTimer.repeat = true;
         heartbeatTimer.start();
-    } else {
+    } else if(msg.op === 11){
+        console.log(message);
+    }else {
         console.log("Message with uncaught code " + msg.op + " recived!");
     }
+}
+
+var completeVoiceInitilization = function(){
+    var endpoint = currentVoiceConnection.endpoint.trim();
+    if(endpoint.indexOf(":80", endpoint.length - 3)){
+        currentVoiceConnection.endpoint = endpoint.substring(0, endpoint.length-3);
+    }
+
+    console.log("Connecting Voice Websocket to: wss://" + currentVoiceConnection.endpoint);
+    currentVoiceConnection.jSONWS = createWebsocket("wss://" + currentVoiceConnection.endpoint, currentVoiceConnection.jSONSocketStsChange, currentVoiceConnection.jSONRecived);
 }
 
 var statusChanged = function(){
@@ -180,7 +207,26 @@ var handleEvent = function(object){
             serverMap[channel.id] = channel.guild_id;
             fireEvent(SERVER_CHANNELS, channel.guild_id);
         }
-    } else {
+    } else if(object.t === "VOICE_STATE_UPDATE"){
+        if(object.d.user_id !== user.id){
+            return;
+        }
+        currentVoiceConnection.sessionId = object.d.session_id;
+        currentVoiceConnection.initilizationsLeft --;
+        if(currentVoiceConnection.initilizationsLeft < 1){
+            completeVoiceInitilization();
+        }
+    } else if(object.t === "VOICE_SERVER_UPDATE"){
+        if(object.d.guild_id !== currentVoiceConnection.guildId){
+            return;
+        }
+        currentVoiceConnection.token = object.d.token;
+        currentVoiceConnection.endpoint = object.d.endpoint;
+        currentVoiceConnection.initilizationsLeft --;
+        if(currentVoiceConnection.initilizationsLeft < 1){
+            completeVoiceInitilization();
+        }
+    }else {
         console.log("Uncaught event " + object.t);
     }
 }
@@ -310,6 +356,18 @@ var loadMoreMessageForCurrentChannel = function(){
     }
 }
 
+var joinVoiceChannel = function(channelId){
+    var msg = {
+        op: 4,
+        d: {guild_id:serverMap[channelId],
+            channel_id:channelId,
+            self_mute: false,
+            self_deaf: false}
+    };
+    websocket.sendTextMessage(JSON.stringify(msg));
+    currentVoiceConnection = new VoiceConnection(channelId, serverMap[channelId]);
+}
+
 var typingUpdate = function(){
     var deletes = [];
     for(var i in typeingMap){
@@ -338,4 +396,112 @@ var fireEvent = function(event, args){
     for(var i = 0; i<listeners[event].length; i++){
         listeners[event][i](event, args);
     }
+}
+
+var VoiceConnection = function(channelId, guildId){
+    var self = this;
+    this.channelId = channelId;
+    this.guildId = guildId;
+    this.mute = false;
+    this.deaf = false;
+    this.initilizationsLeft = 2;
+    this.jSONSocketStsChange = function(){
+        if(!self.jSONWS){
+            return;
+        }
+        console.log("Audio websocket status changed to: " + self.jSONWS.status);
+        if(self.jSONWS.status === 1){
+            var message = {
+                op: 0,
+                d: {
+                    server_id: self.guildId,
+                    user_id: user.id,
+                    session_id: self.sessionId,
+                    token: self.token
+                }
+            }
+            self.jSONWS.sendTextMessage(JSON.stringify(message));
+            message = {
+                op: 5,
+                d: {
+                    speaking: true,
+                    delay: 5
+                }
+            }
+            self.jSONWS.sendTextMessage(JSON.stringify(message));
+        } else if(self.jSONWS.status === 4) {
+            console.log("Websocket error is: " + self.jSONWS.errorString);
+        }
+    }
+    this.jSONRecived = function(json){
+        var msg = JSON.parse(json);
+        if(msg.op === 2){
+            var info = msg.d;
+            self.ssrc = info.ssrc;
+            self.port = info.port;
+            var found = false;
+            for(var i = 0; i<info.modes.length; i++){
+                found |= info.modes[i] === "xsalsa20_poly1305";
+            }
+            self.mode = found ? "xsalsa20_poly1305" : info.modes[i];
+            if(!found){
+                console.log("Could not find xsalsa20_poly1305 mode, using: " + self.mode);
+            }
+            self.heartbeatInterval = info.heartbeat_interval;
+            self.heartbeatTimer = Qt.createQmlObject("import QtQuick 2.0; Timer {}", websocketParrent);
+            self.heartbeatTimer.triggered.connect(self.heartbeat);
+            self.heartbeatTimer.interval = self.heartbeatInterval;
+            self.heartbeatTimer.repeat = true;
+            self.heartbeatTimer.start();
+            voiceConnection.ssrc = self.ssrc;
+            voiceConnection.port = self.port;
+            voiceConnection.url = self.endpoint;
+        } else if(msg.op === 4){
+            self.mode = msg.d.mode;
+            var string = "";
+            for(var k in msg.d.secret_key){
+                var local = msg.d.secret_key[k].toString(16);
+                if(local.length === 0){
+                    local = "00";
+                } else if(local.length === 1){
+                    local = "0" + local;
+                }
+                string += local;
+            }
+            console.log(string);
+            voiceConnection.key = JSON.stringify(msg.d.secret_key);
+            voiceConnection.startVoiceTransmission();
+        } else {
+            console.log("Uncaught message: " + json);
+        }
+    }
+    this.discoveryFinished = function(){
+        var address = voiceConnection.getLocalAddress() + "";
+        var port = voiceConnection.getLocalPort() + 0;
+        self.localAddress = address;
+        self.localPort = port;
+        var message = {
+            op: 1,
+            d: {
+                protocol: "udp",
+                data: {
+                    address: address,
+                    port: port,
+                    mode: self.mode
+                }
+            }
+        }
+        console.log(JSON.stringify(message));
+        self.jSONWS.sendTextMessage(JSON.stringify(message));
+    }
+
+    this.heartbeat = function(){
+        var heartBeat = {
+            "op": 3,
+            "d": Date.now()
+        }
+        self.jSONWS.sendTextMessage(JSON.stringify(heartBeat));
+    }
+
+    return this;
 }

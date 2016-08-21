@@ -2,6 +2,7 @@ TEMPLATE = lib
 TARGET = Cacophonybackend
 QT += qml quick
 QT += multimedia
+QT += network
 CONFIG += qt plugin
 
 load(ubuntu-click)
@@ -11,11 +12,19 @@ TARGET = $$qtLibraryTarget($$TARGET)
 # Input
 SOURCES += \
     backend.cpp \
-    mytype.cpp
+    audioencoder.cpp \
+    audiopacket.cpp \
+    audiodecoder.cpp \
+    voiceconnection.cpp \
+    udpconnection.cpp
 
 HEADERS += \
     backend.h \
-    mytype.h
+    audioencoder.h \
+    audiopacket.h \
+    audiodecoder.h \
+    voiceconnection.h \
+    udpconnection.h
 
 
 OTHER_FILES = qmldir
