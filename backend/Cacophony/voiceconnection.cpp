@@ -9,9 +9,10 @@
 #include <QAudioDeviceInfo>
 #include "audioencoder.h"
 #include "audiopacket.h"
+#include <sodium.h>
 
-#define FRAME_SIZE 960
-#define MAX_FRAME_SIZE 6*960
+#define FRAME_SIZE 48000*4/100
+#define MAX_FRAME_SIZE 6*FRAME_SIZE
 
 using namespace std;
 
@@ -25,10 +26,10 @@ VoiceConnection::VoiceConnection(QObject *parent) :
     m_encoder(new AudioEncoder(64000)),
     m_decoder(new AudioDecoder())
 {
-    m_playbackData = new QBuffer();
-    m_playbackData->open(QBuffer::ReadWrite);
+//    m_playbackData = new QBuffer();
+//    m_playbackData->open(QBuffer::ReadWrite);
     QAudioFormat format;
-    format.setSampleRate(48000);
+    format.setSampleRate(35000);
     format.setChannelCount(2);
     format.setSampleSize(16);
     format.setCodec("audio/pcm");
@@ -37,7 +38,12 @@ VoiceConnection::VoiceConnection(QObject *parent) :
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultOutputDevice();
     if(info.isFormatSupported(format)){
         m_audioOutput = new QAudioOutput(format, this);
-        m_audioOutput->start(m_playbackData);
+        m_audioOutput->setVolume(1);
+        m_playbackData =  m_audioOutput->start();
+    } else {
+        format = info.nearestFormat(format);
+        m_audioOutput = new QAudioOutput(format, this);
+        qDebug("New but still the same?");
     }
 }
 
@@ -198,7 +204,9 @@ quint16 VoiceConnection::getLocalPort(){
 }
 
 void VoiceConnection::reciveData(){
-    qDebug("There is data to be had");
+    if(m_audioOutput->state() != QAudio::ActiveState){
+        m_playbackData = m_audioOutput->start();
+    }
     while (m_socket->hasPendingDatagrams()) {
         QByteArray datagram;
         datagram.resize(m_socket->pendingDatagramSize());
@@ -249,9 +257,34 @@ void VoiceConnection::transmitVoiceData(){
             break;
         m_readLocation += FRAME_SIZE*4;
         AudioPacket packet(pcm, read, m_key, m_ssrc, m_encoder);
-        char data[packet.size()];
+        char *data = new char[packet.size()];
         packet.getData(data);
-        char signedData[packet.size()];
-        m_socket->write(signedData, packet.size());
+        m_socket->write(data, packet.size());
+    }
+}
+
+void VoiceConnection::mute(bool mute){
+    if(m_active){
+        if(mute){
+            m_audioInput->suspend();
+            char pcm[FRAME_SIZE*4];
+            for(int i = 0; i<FRAME_SIZE*4; i++){
+                pcm[i] = 0;
+            }
+            AudioPacket packet(pcm, FRAME_SIZE*4, m_key, m_ssrc, m_encoder);
+            char data[packet.size()];
+            packet.getData(data);
+            m_socket->write(data);
+        } else {
+            m_audioInput->resume();
+        }
+    }
+}
+
+void VoiceConnection::deafen(bool deaf){
+    if(deaf){
+        m_audioOutput->setVolume(0);
+    } else {
+        m_audioOutput->setVolume(1);
     }
 }

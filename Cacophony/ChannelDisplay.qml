@@ -43,7 +43,7 @@ ListItem {
           id: info
           iconName: "info";
           onTriggered: {
-              pageLayout.addPageToNextColumn(serverPage ,voiceChannelPage, {channelName: channelName.text});
+              pageLayout.addPageToNextColumn(serverPage ,voiceChannelPage, {channelName: channelName.text, channelId: id});
           }
       }
 

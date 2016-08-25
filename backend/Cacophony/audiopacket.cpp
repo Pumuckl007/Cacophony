@@ -74,7 +74,7 @@ int AudioPacket::encrypt(unsigned char* input, unsigned char* output, int length
     nonce[1] = 0x78;
     nonce[2] = m_sequence >> 8;
     nonce[3] = m_sequence;
-    uint time = QDateTime::currentDateTime().toTime_t();
+    uint time = m_sequence*7680;
     for(int i = 0; i<4; i++){
         nonce[7-i] = time;
         time = time >> 8;

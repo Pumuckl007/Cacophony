@@ -21,11 +21,7 @@ Page {
                 iconName:"speaker";
                 text: i18n.tr("Silence")
                 onTriggered: {
-                    if(silence.iconName === "speaker"){
-                        silence.iconName = "speaker-mute"
-                    } else {
-                        silence.iconName = "speaker";
-                    }
+                    discord().deafen();
                 }
             },
             Action {
@@ -33,11 +29,7 @@ Page {
                 iconName:"microphone";
                 text: i18n.tr("Mute")
                 onTriggered: {
-                    if(mute.iconName === "microphone"){
-                        mute.iconName = "microphone-mute"
-                    } else {
-                        mute.iconName = "microphone";
-                    }
+                    discord().mute();
                 }
             },
             Action {
@@ -50,6 +42,13 @@ Page {
             }
 
         ]
+    }
+
+    Component.onCompleted: {
+        discord().addEventListener(discord().VOICE_CONNECTION_UPDATE, function(event, vc){
+            silence.iconName = vc.deaf ? "speaker-mute" : "speaker";
+            mute.iconName = vc.deaf ? "microphone-mute" : "microphone";
+        });
     }
 
     function updateChannelsModel(event, checkServerId){

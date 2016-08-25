@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-21 12:25-0700\n"
+"POT-Creation-Date: 2016-08-24 21:20-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,35 +33,35 @@ msgstr ""
 msgid "Deafen"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:38
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:34
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:40
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:34
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:30
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:38
 msgid "Mute"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:111
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:103
 msgid "Send"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:122
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:114
 msgid "Message"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:213
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:209
 msgid ","
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:217
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:219
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:213
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:215
 msgid "and"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:217
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:219
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:213
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:215
 msgid "are typing."
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:221
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/ChatPage.qml:217
 msgid " is typing."
 msgstr ""
 
@@ -96,15 +96,15 @@ msgid "Cancle"
 msgstr ""
 
 #: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:22
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:28
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:30
 msgid "Silence"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:45
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:37
 msgid "Info"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:97
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/Server.qml:96
 msgid "New Channel"
 msgstr ""
 
@@ -112,8 +112,12 @@ msgstr ""
 msgid " : Users"
 msgstr ""
 
-#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:20
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:21
 msgid "Join"
+msgstr ""
+
+#: /home/max/src/ubuntuApps/Cacophony/Cacophony/VoiceChannel.qml:46
+msgid "Connection Info"
 msgstr ""
 
 #: /home/max/src/ubuntuApps/build-Cacophony-Desktop-Debug/Cacophony/Cacophony.desktop.h:1

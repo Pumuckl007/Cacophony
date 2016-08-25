@@ -62,10 +62,11 @@ MainView {
     }
 
     Timer{
-        interval: 100;
+        id: timerDebug
+        interval: 4000;
         repeat: false;
         onTriggered: {
-            voiceConnection.connectAndDiscover();
+            voiceConnection.writePackets();
         }
         running: false;
     }
@@ -76,6 +77,7 @@ MainView {
         //voiceConnection.port= 39338;
         //voiceConnection.url = "example.com";
         Discord.init(mainView, voiceConnection);
+        //voiceConnection.decodeTest();
         //Discord.addEventListener(Discord.CHANGE_CHANNEL, done);
     }
 }

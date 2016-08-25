@@ -5,6 +5,7 @@ import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Page {
     property string channelName
+    property string channelId;
     id: voiceChannels
     header: PageHeader {
         id: channelNameHeader
@@ -19,7 +20,8 @@ Page {
                 iconName:"ok";
                 text: i18n.tr("Join")
                 onTriggered: {
-
+                    console.log(channelId);
+                    discord().joinVoiceChannel(channelId);
                 }
             },
             Action {
@@ -27,11 +29,7 @@ Page {
                 iconName:"speaker";
                 text: i18n.tr("Silence")
                 onTriggered: {
-                    if(silence.iconName === "speaker"){
-                        silence.iconName = "speaker-mute"
-                    } else {
-                        silence.iconName = "speaker";
-                    }
+                    discord().deafen();
                 }
             },
             Action {
@@ -39,14 +37,40 @@ Page {
                 iconName:"microphone";
                 text: i18n.tr("Mute")
                 onTriggered: {
-                    if(mute.iconName === "microphone"){
-                        mute.iconName = "microphone-mute"
-                    } else {
-                        mute.iconName = "microphone";
-                    }
+                    discord().mute();
+                }
+            },
+            Action {
+                id: connectionQuality
+                iconName: "gsm-3g-none";
+                text: i18n.tr("Connection Info");
+                onTriggered: {
+
                 }
             }
+
         ]
+
+        Component.onCompleted: {
+            discord().addEventListener(discord().VOICE_CONNECTION_UPDATE, function(event, vc){
+                silence.iconName = vc.deaf ? "speaker-mute" : "speaker";
+                mute.iconName = vc.mute ? "microphone-mute" : "microphone";
+            });
+            discord().addEventListener(discord().PING_UPDATED, function(event, vc){
+                console.log("yeah " + vc.ping);
+                if(vc.ping < 25){
+                    connectionQuality.iconName = "gsm-3g-full-secure";
+                } else if(vc.ping < 50){
+                    connectionQuality.iconName = "gsm-3g-high-secure";
+                } else if(vc.ping < 100){
+                    connectionQuality.iconName = "gsm-3g-medium-secure";
+                } else if(vc.ping < 250){
+                    connectionQuality.iconName = "gsm-3g-low-secure";
+                } else {
+                    connectionQuality.iconName = "gsm-3g-none";
+                }
+            });
+        }
     }
 
     Rectangle {

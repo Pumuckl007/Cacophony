@@ -35,6 +35,9 @@ public:
     Q_INVOKABLE QString getLocalAddress();
     Q_INVOKABLE quint16 getLocalPort();
     Q_INVOKABLE void startVoiceTransmission();
+    Q_INVOKABLE void decodeTest();
+    Q_INVOKABLE void mute(bool mute);
+    Q_INVOKABLE void deafen(bool deaf);
     ~VoiceConnection();
 
 public slots:
@@ -74,7 +77,7 @@ protected:
     QAudioDeviceInfo m_devInfo;
     QAudioInput *m_audioInput;
     QBuffer *m_audioData;
-    QBuffer *m_playbackData;
+    QIODevice *m_playbackData;
     QAudioOutput *m_audioOutput;
     long m_readLocation;
 

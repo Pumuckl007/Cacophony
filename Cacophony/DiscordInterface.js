@@ -25,6 +25,10 @@ var TYPING_START = "TYPING_START";
 var TYPING_STOP = "TYPING_STOP";
 //Fired when DMs are added to or removed
 var DMS_CHANGED = "DMS_CHANGED";
+//Fired when any update to a voice channel happend
+var VOICE_CONNECTION_UPDATE = "VOICE_CONNECTION_UPDATE";
+//Fired when the ping is updated
+var PING_UPDATED = "PING_UPDATED";
 
 var token = "";
 var websocket;
@@ -405,6 +409,7 @@ var VoiceConnection = function(channelId, guildId){
     this.mute = false;
     this.deaf = false;
     this.initilizationsLeft = 2;
+    this.ping = 0;
     this.jSONSocketStsChange = function(){
         if(!self.jSONWS){
             return;
@@ -459,18 +464,22 @@ var VoiceConnection = function(channelId, guildId){
         } else if(msg.op === 4){
             self.mode = msg.d.mode;
             var string = "";
-            for(var k in msg.d.secret_key){
-                var local = msg.d.secret_key[k].toString(16);
-                if(local.length === 0){
-                    local = "00";
-                } else if(local.length === 1){
-                    local = "0" + local;
-                }
-                string += local;
-            }
-            console.log(string);
+//            for(var k in msg.d.secret_key){
+//                var local = msg.d.secret_key[k].toString(16);
+//                if(local.length === 0){
+//                    local = "00";
+//                } else if(local.length === 1){
+//                    local = "0" + local;
+//                }
+//                string += local;
+//            }
+//            console.log(string);
             voiceConnection.key = JSON.stringify(msg.d.secret_key);
             voiceConnection.startVoiceTransmission();
+        } else if(msg.op === 3){
+            self.ping = Date.now()-Number(msg.d);
+            console.log("Ping " + self.ping);
+            fireEvent(PING_UPDATED, self);
         } else {
             console.log("Uncaught message: " + json);
         }
@@ -491,7 +500,6 @@ var VoiceConnection = function(channelId, guildId){
                 }
             }
         }
-        console.log(JSON.stringify(message));
         self.jSONWS.sendTextMessage(JSON.stringify(message));
     }
 
@@ -503,5 +511,36 @@ var VoiceConnection = function(channelId, guildId){
         self.jSONWS.sendTextMessage(JSON.stringify(heartBeat));
     }
 
+    this.sendUpdate = function(){
+        var message = {
+            op: 5,
+            d: {
+                speaking: !self.mute,
+                delay:5
+            }
+        }
+        self.jSONWS.sendTextMessage(JSON.stringify(message));
+        console.log(JSON.stringify(message));
+    }
+
     return this;
 }
+
+var mute = function(){
+    if(currentVoiceConnection){
+        currentVoiceConnection.mute ^= true;
+        voiceConnection.mute(currentVoiceConnection.mute);
+        currentVoiceConnection.sendUpdate();
+        fireEvent(VOICE_CONNECTION_UPDATE, currentVoiceConnection);
+    }
+}
+
+var deafen = function(){
+    if(currentVoiceConnection){
+        currentVoiceConnection.deaf ^= true;
+        voiceConnection.deafen(currentVoiceConnection.deaf);
+        fireEvent(VOICE_CONNECTION_UPDATE, currentVoiceConnection);
+    }
+}
+
+
