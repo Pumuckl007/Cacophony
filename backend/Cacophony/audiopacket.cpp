@@ -58,14 +58,26 @@ AudioPacket::AudioPacket(char* opus, int length, unsigned char key[], char ssrc[
     for(int i = 0; i<length; i++){
         unsignedData[i] = opus[i];
     }
-    unsigned char* decrypted = new unsigned char[length - crypto_secretbox_MACBYTES - HEADER_SIZE];
-    int decryptedLength = decrypt(unsignedData, decrypted, length);
-    unsigned char* decoded = new unsigned char[AudioDecoder::MAX_PACKET_SIZE];
-    int decodedLength = decoder->decode(decrypted, decoded, decryptedLength);
-    delete decrypted;
-    delete unsignedData;
-    m_finalData = decoded;
-    m_dataSize = decodedLength;
+    if(length - crypto_secretbox_MACBYTES - HEADER_SIZE < 1){
+
+    } else {
+        unsigned char* decrypted = new unsigned char[length - crypto_secretbox_MACBYTES - HEADER_SIZE];
+        int decryptedLength = decrypt(unsignedData, decrypted, length);
+        if(decryptedLength < 0){
+            m_finalData = unsignedData;
+            m_dataSize = length;
+        } else {
+            unsigned char* decoded = new unsigned char[AudioDecoder::MAX_PACKET_SIZE];
+            int decodedLength = decoder->decode(decrypted, decoded, decryptedLength);
+            m_finalData = decoded;
+            m_dataSize = decodedLength;
+        }
+        delete decrypted;
+        delete unsignedData;
+        return;
+    }
+    m_finalData = unsignedData;
+    m_dataSize = length;
 }
 
 int AudioPacket::encrypt(unsigned char* input, unsigned char* output, int length){
@@ -74,7 +86,7 @@ int AudioPacket::encrypt(unsigned char* input, unsigned char* output, int length
     nonce[1] = 0x78;
     nonce[2] = m_sequence >> 8;
     nonce[3] = m_sequence;
-    uint time = m_sequence*7680;
+    uint time = m_sequence*960;
     for(int i = 0; i<4; i++){
         nonce[7-i] = time;
         time = time >> 8;
@@ -121,6 +133,8 @@ int AudioPacket::decrypt(unsigned char* input, unsigned char* output, int length
         nonce[i+12] = 0;
     }
     int decryptedLength = length - crypto_secretbox_MACBYTES - 12;
+    if(decryptedLength < 0)
+        return -1;
     int returnValue = crypto_secretbox_open_easy(output, encrypted, length-12, nonce, m_key);
     if(returnValue < 0){
         cout << "MESSAGE FORGED!\n";
@@ -130,6 +144,7 @@ int AudioPacket::decrypt(unsigned char* input, unsigned char* output, int length
 }
 
 AudioPacket::~AudioPacket(){
-    delete m_finalData;
+    if(m_finalData)
+        delete m_finalData;
 }
 

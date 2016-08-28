@@ -1,7 +1,5 @@
 #include "voiceconnection.h"
 
-#include <string>
-#include <iostream>
 #include <QTimer>
 #include <string.h>
 #include <QFile>
@@ -11,7 +9,9 @@
 #include "audiopacket.h"
 #include <sodium.h>
 
-#define FRAME_SIZE 48000*4/100
+#include <QDateTime>
+
+#define FRAME_SIZE 48000*2/100
 #define MAX_FRAME_SIZE 6*FRAME_SIZE
 
 using namespace std;
@@ -29,7 +29,7 @@ VoiceConnection::VoiceConnection(QObject *parent) :
 //    m_playbackData = new QBuffer();
 //    m_playbackData->open(QBuffer::ReadWrite);
     QAudioFormat format;
-    format.setSampleRate(35000);
+    format.setSampleRate(48000);
     format.setChannelCount(2);
     format.setSampleSize(16);
     format.setCodec("audio/pcm");
@@ -54,7 +54,7 @@ VoiceConnection::~VoiceConnection() {
 void VoiceConnection::setConnectionURL(QString url)
 {
     if(m_active){
-        cout << "error can not set url while active\n";
+        qWarning("error can not set url while active");
         return;
     }
     if(m_hasAddress){
@@ -164,7 +164,7 @@ void VoiceConnection::continueDiscovery(){
     qDebug("UDP connection ready!");
     char data[70];
     for(int i = 0; i<4; i++){
-        data[i] = m_ssrc[4-i];
+        data[i] = m_ssrc[3-i];
     }
     for(int i = 4; i<70; i++){
         data[i] = 0;
@@ -186,6 +186,7 @@ void VoiceConnection::completeDiscovery(){
 
         QString myIp = QString(datagram.right(datagram.size() - 4).left(datagram.indexOf('\0', 4)- 4));
         m_localAddress = QHostAddress(myIp);
+        qDebug("Found local IP: %s", myIp.toStdString().c_str());
         break;
     }
     QObject::disconnect(m_socket, SIGNAL(readyRead()),
@@ -239,7 +240,7 @@ void VoiceConnection::startVoiceTransmission()
         m_audioInput = new QAudioInput(format, this);
         m_timer = new QTimer(this);
         QTimer::connect(m_timer, SIGNAL(timeout()), this, SLOT(transmitVoiceData()));
-        m_timer->start(10);
+        m_timer->start(20);
         m_audioInput->start(m_audioData);
     } else {
             format = info.nearestFormat(format);
@@ -250,16 +251,22 @@ void VoiceConnection::startVoiceTransmission()
 
 void VoiceConnection::transmitVoiceData(){
     char pcm[FRAME_SIZE*4];
-    while(m_audioData->size() > m_readLocation + FRAME_SIZE*4){
+    if(m_audioData->size() > m_readLocation + FRAME_SIZE*4){
+        int pos = m_audioData->pos();
         m_audioData->seek(m_readLocation);
         int read = m_audioData->read(pcm, FRAME_SIZE*4);
-        if(read < FRAME_SIZE*4)
-            break;
-        m_readLocation += FRAME_SIZE*4;
+        m_audioData->seek(pos);
+        if(read < FRAME_SIZE*4){
+            qDebug("Frame Dropped");
+            return;
+        }
+        m_readLocation += read;
         AudioPacket packet(pcm, read, m_key, m_ssrc, m_encoder);
         char *data = new char[packet.size()];
         packet.getData(data);
         m_socket->write(data, packet.size());
+    } else {
+        qWarning("Microphone buffer underflow!");
     }
 }
 

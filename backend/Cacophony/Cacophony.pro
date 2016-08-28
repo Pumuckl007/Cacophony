@@ -43,12 +43,14 @@ qmldir.path = $$installPath
 target.path = $$installPath
 INSTALLS += target qmldir
 
-LIBS += -L$$PWD/3rdparty/opus/lib/ -lopus
+INCLUDEPATH += $$PWD/../opus/
+DEPENDPATH += $$PWD/../opus/
 
-INCLUDEPATH += $$PWD/3rdparty/opus/include
-DEPENDPATH += $$PWD/3rdparty/opus/include
+LIBS += $$PWD/../opus/.libs/libopus.a
 
-LIBS += -L$$PWD/3rdparty/sodium/lib/ -lsodium
+LIBS += $$OUT_PWD/../sodium/libsodium.a
 
-INCLUDEPATH += $$PWD/3rdparty/sodium/include
-DEPENDPATH += $$PWD/3rdparty/sodium/include
+INCLUDEPATH +=$$OUT_PWD/../sodium/
+
+include($$PWD/../sodium/sodium.pri)
+

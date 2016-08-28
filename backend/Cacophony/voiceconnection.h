@@ -46,6 +46,7 @@ public slots:
     void continueDiscovery();
     void reciveData();
     void transmitVoiceData();
+    void completeMetric();
 
 signals:
     Q_SIGNAL void dNSFinished();

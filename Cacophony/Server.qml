@@ -47,7 +47,7 @@ Page {
     Component.onCompleted: {
         discord().addEventListener(discord().VOICE_CONNECTION_UPDATE, function(event, vc){
             silence.iconName = vc.deaf ? "speaker-mute" : "speaker";
-            mute.iconName = vc.deaf ? "microphone-mute" : "microphone";
+            mute.iconName = vc.mute ? "microphone-mute" : "microphone";
         });
     }
 

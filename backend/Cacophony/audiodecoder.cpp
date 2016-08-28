@@ -1,17 +1,9 @@
 #include "audiodecoder.h"
 
-#include <string>
-#include <iostream>
-
-using namespace std;
-
 AudioDecoder::AudioDecoder()
 {
     int err;
     m_decoder = opus_decoder_create(SAMPLE_RATE, CHANNELS, &err);
-    if(err < 0){
-        cout << "There was an error while initilizing the opus encoder: " << opus_strerror(err);
-    }
 }
 
 AudioDecoder::~AudioDecoder(){

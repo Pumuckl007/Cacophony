@@ -1,0 +1,42 @@
+src/mlp_data.lo: src/mlp_data.c \
+ /usr/arm-linux-gnueabihf/include/stdc-predef.h config.h src/mlp.h \
+ celt/arch.h include/opus_types.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h \
+ /usr/arm-linux-gnueabihf/include/stdint.h \
+ /usr/arm-linux-gnueabihf/include/features.h \
+ /usr/arm-linux-gnueabihf/include/sys/cdefs.h \
+ /usr/arm-linux-gnueabihf/include/bits/wordsize.h \
+ /usr/arm-linux-gnueabihf/include/gnu/stubs.h \
+ /usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h \
+ /usr/arm-linux-gnueabihf/include/bits/wchar.h include/opus_defines.h \
+ include/opus_types.h
+
+/usr/arm-linux-gnueabihf/include/stdc-predef.h:
+
+config.h:
+
+src/mlp.h:
+
+celt/arch.h:
+
+include/opus_types.h:
+
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h:
+
+/usr/arm-linux-gnueabihf/include/stdint.h:
+
+/usr/arm-linux-gnueabihf/include/features.h:
+
+/usr/arm-linux-gnueabihf/include/sys/cdefs.h:
+
+/usr/arm-linux-gnueabihf/include/bits/wordsize.h:
+
+/usr/arm-linux-gnueabihf/include/gnu/stubs.h:
+
+/usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h:
+
+/usr/arm-linux-gnueabihf/include/bits/wchar.h:
+
+include/opus_defines.h:
+
+include/opus_types.h:

@@ -1,0 +1,198 @@
+celt/kiss_fft.lo: celt/kiss_fft.c \
+ /usr/arm-linux-gnueabihf/include/stdc-predef.h config.h \
+ celt/_kiss_fft_guts.h celt/kiss_fft.h \
+ /usr/arm-linux-gnueabihf/include/stdlib.h \
+ /usr/arm-linux-gnueabihf/include/features.h \
+ /usr/arm-linux-gnueabihf/include/sys/cdefs.h \
+ /usr/arm-linux-gnueabihf/include/bits/wordsize.h \
+ /usr/arm-linux-gnueabihf/include/gnu/stubs.h \
+ /usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h \
+ /usr/arm-linux-gnueabihf/include/bits/waitflags.h \
+ /usr/arm-linux-gnueabihf/include/bits/waitstatus.h \
+ /usr/arm-linux-gnueabihf/include/endian.h \
+ /usr/arm-linux-gnueabihf/include/bits/endian.h \
+ /usr/arm-linux-gnueabihf/include/bits/byteswap.h \
+ /usr/arm-linux-gnueabihf/include/bits/types.h \
+ /usr/arm-linux-gnueabihf/include/bits/typesizes.h \
+ /usr/arm-linux-gnueabihf/include/bits/byteswap-16.h \
+ /usr/arm-linux-gnueabihf/include/sys/types.h \
+ /usr/arm-linux-gnueabihf/include/time.h \
+ /usr/arm-linux-gnueabihf/include/sys/select.h \
+ /usr/arm-linux-gnueabihf/include/bits/select.h \
+ /usr/arm-linux-gnueabihf/include/bits/sigset.h \
+ /usr/arm-linux-gnueabihf/include/bits/time.h \
+ /usr/arm-linux-gnueabihf/include/sys/sysmacros.h \
+ /usr/arm-linux-gnueabihf/include/bits/pthreadtypes.h \
+ /usr/arm-linux-gnueabihf/include/alloca.h \
+ /usr/arm-linux-gnueabihf/include/bits/stdlib-float.h \
+ /usr/arm-linux-gnueabihf/include/math.h \
+ /usr/arm-linux-gnueabihf/include/bits/math-vector.h \
+ /usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h \
+ /usr/arm-linux-gnueabihf/include/bits/huge_val.h \
+ /usr/arm-linux-gnueabihf/include/bits/huge_valf.h \
+ /usr/arm-linux-gnueabihf/include/bits/huge_vall.h \
+ /usr/arm-linux-gnueabihf/include/bits/inf.h \
+ /usr/arm-linux-gnueabihf/include/bits/nan.h \
+ /usr/arm-linux-gnueabihf/include/bits/mathdef.h \
+ /usr/arm-linux-gnueabihf/include/bits/mathcalls.h celt/arch.h \
+ opus_types.h /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h \
+ /usr/arm-linux-gnueabihf/include/stdint.h \
+ /usr/arm-linux-gnueabihf/include/bits/wchar.h opus_defines.h \
+ opus_types.h celt/cpu_support.h celt/arm/armcpu.h celt/os_support.h \
+ /usr/arm-linux-gnueabihf/include/string.h \
+ /usr/arm-linux-gnueabihf/include/xlocale.h \
+ /usr/arm-linux-gnueabihf/include/stdio.h \
+ /usr/arm-linux-gnueabihf/include/libio.h \
+ /usr/arm-linux-gnueabihf/include/_G_config.h \
+ /usr/arm-linux-gnueabihf/include/wchar.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h \
+ /usr/arm-linux-gnueabihf/include/bits/stdio_lim.h \
+ /usr/arm-linux-gnueabihf/include/bits/sys_errlist.h celt/mathops.h \
+ celt/entcode.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h \
+ /usr/arm-linux-gnueabihf/include/limits.h \
+ /usr/arm-linux-gnueabihf/include/bits/posix1_lim.h \
+ /usr/arm-linux-gnueabihf/include/bits/local_lim.h \
+ /usr/arm-linux-gnueabihf/include/linux/limits.h \
+ /usr/arm-linux-gnueabihf/include/bits/posix2_lim.h celt/ecintrin.h \
+ celt/stack_alloc.h
+
+/usr/arm-linux-gnueabihf/include/stdc-predef.h:
+
+config.h:
+
+celt/_kiss_fft_guts.h:
+
+celt/kiss_fft.h:
+
+/usr/arm-linux-gnueabihf/include/stdlib.h:
+
+/usr/arm-linux-gnueabihf/include/features.h:
+
+/usr/arm-linux-gnueabihf/include/sys/cdefs.h:
+
+/usr/arm-linux-gnueabihf/include/bits/wordsize.h:
+
+/usr/arm-linux-gnueabihf/include/gnu/stubs.h:
+
+/usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h:
+
+/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h:
+
+/usr/arm-linux-gnueabihf/include/bits/waitflags.h:
+
+/usr/arm-linux-gnueabihf/include/bits/waitstatus.h:
+
+/usr/arm-linux-gnueabihf/include/endian.h:
+
+/usr/arm-linux-gnueabihf/include/bits/endian.h:
+
+/usr/arm-linux-gnueabihf/include/bits/byteswap.h:
+
+/usr/arm-linux-gnueabihf/include/bits/types.h:
+
+/usr/arm-linux-gnueabihf/include/bits/typesizes.h:
+
+/usr/arm-linux-gnueabihf/include/bits/byteswap-16.h:
+
+/usr/arm-linux-gnueabihf/include/sys/types.h:
+
+/usr/arm-linux-gnueabihf/include/time.h:
+
+/usr/arm-linux-gnueabihf/include/sys/select.h:
+
+/usr/arm-linux-gnueabihf/include/bits/select.h:
+
+/usr/arm-linux-gnueabihf/include/bits/sigset.h:
+
+/usr/arm-linux-gnueabihf/include/bits/time.h:
+
+/usr/arm-linux-gnueabihf/include/sys/sysmacros.h:
+
+/usr/arm-linux-gnueabihf/include/bits/pthreadtypes.h:
+
+/usr/arm-linux-gnueabihf/include/alloca.h:
+
+/usr/arm-linux-gnueabihf/include/bits/stdlib-float.h:
+
+/usr/arm-linux-gnueabihf/include/math.h:
+
+/usr/arm-linux-gnueabihf/include/bits/math-vector.h:
+
+/usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h:
+
+/usr/arm-linux-gnueabihf/include/bits/huge_val.h:
+
+/usr/arm-linux-gnueabihf/include/bits/huge_valf.h:
+
+/usr/arm-linux-gnueabihf/include/bits/huge_vall.h:
+
+/usr/arm-linux-gnueabihf/include/bits/inf.h:
+
+/usr/arm-linux-gnueabihf/include/bits/nan.h:
+
+/usr/arm-linux-gnueabihf/include/bits/mathdef.h:
+
+/usr/arm-linux-gnueabihf/include/bits/mathcalls.h:
+
+celt/arch.h:
+
+opus_types.h:
+
+/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h:
+
+/usr/arm-linux-gnueabihf/include/stdint.h:
+
+/usr/arm-linux-gnueabihf/include/bits/wchar.h:
+
+opus_defines.h:
+
+opus_types.h:
+
+celt/cpu_support.h:
+
+celt/arm/armcpu.h:
+
+celt/os_support.h:
+
+/usr/arm-linux-gnueabihf/include/string.h:
+
+/usr/arm-linux-gnueabihf/include/xlocale.h:
+
+/usr/arm-linux-gnueabihf/include/stdio.h:
+
+/usr/arm-linux-gnueabihf/include/libio.h:
+
+/usr/arm-linux-gnueabihf/include/_G_config.h:
+
+/usr/arm-linux-gnueabihf/include/wchar.h:
+
+/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h:
+
+/usr/arm-linux-gnueabihf/include/bits/stdio_lim.h:
+
+/usr/arm-linux-gnueabihf/include/bits/sys_errlist.h:
+
+celt/mathops.h:
+
+celt/entcode.h:
+
+/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h:
+
+/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h:
+
+/usr/arm-linux-gnueabihf/include/limits.h:
+
+/usr/arm-linux-gnueabihf/include/bits/posix1_lim.h:
+
+/usr/arm-linux-gnueabihf/include/bits/local_lim.h:
+
+/usr/arm-linux-gnueabihf/include/linux/limits.h:
+
+/usr/arm-linux-gnueabihf/include/bits/posix2_lim.h:
+
+celt/ecintrin.h:
+
+celt/stack_alloc.h:

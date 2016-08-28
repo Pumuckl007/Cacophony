@@ -7,7 +7,11 @@ TEMPLATE = subdirs
 load(ubuntu-click)
 
 SUBDIRS += Cacophony \
-           backend/Cacophony
+           backend/Cacophony \
+           3rdparty \
+           backend/sodium
+
+Cacophony.depends = 3rdparty
 
 # specify the manifest file, this file is required for click
 # packaging and for the IDE to create runconfigurations
@@ -42,12 +46,12 @@ unittest.depends  = sub-Cacophony
 
 QMAKE_EXTRA_TARGETS += aptest unittest
 
-LIBS += -L$$PWD/3rdparty/opus/lib/ -lopus
+libopus_lib = $$OUT_PWD/libopus.so
+LIBS += libopus_lib
 
-INCLUDEPATH += $$PWD/3rdparty/opus/include
-DEPENDPATH += $$PWD/3rdparty/opus/include
+libopus.target = libopus_lib
+libopus.commands = cd 3rdparty/opus && make -f Makefile
 
-LIBS += -L$$PWD/3rdparty/sodium/lib/ -lsodium
+QMAKE_EXTRA_TARGETS += libopus
 
-INCLUDEPATH += $$PWD/3rdparty/sodium/include
-DEPENDPATH += $$PWD/3rdparty/sodium/include
+LIBS += -L$$OUT_PWD/3rdparty/sodium/ -lsodium
