@@ -902,8 +902,8 @@ AUTOCONF = ${SHELL} /home/max/src/ubuntuApps/Cacophony/backend/opus/missing auto
 AUTOHEADER = ${SHELL} /home/max/src/ubuntuApps/Cacophony/backend/opus/missing autoheader
 AUTOMAKE = ${SHELL} /home/max/src/ubuntuApps/Cacophony/backend/opus/missing automake-1.15
 AWK = gawk
-CC = arm-linux-gnueabihf-gcc
-CCAS = arm-linux-gnueabihf-gcc
+CC = arm-linux-gnueabihf-gcc -std=gnu99
+CCAS = arm-linux-gnueabihf-gcc -std=gnu99
 CCASDEPMODE = depmode=gcc3
 CCASFLAGS = -fPIC
 CCDEPMODE = depmode=gcc3
@@ -931,7 +931,7 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /usr/arm-linux-gnueabihf/bin/ld
+LD = /var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/bin/ld
 LDFLAGS = 
 LIBM = -lm
 LIBOBJS = 

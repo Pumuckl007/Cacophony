@@ -1,6 +1,6 @@
 celt/entcode.lo: celt/entcode.c \
  /usr/arm-linux-gnueabihf/include/stdc-predef.h config.h celt/entcode.h \
- opus_types.h /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h \
+ opus_types.h /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/features.h \
  /usr/arm-linux-gnueabihf/include/sys/cdefs.h \
@@ -9,17 +9,15 @@ celt/entcode.lo: celt/entcode.c \
  /usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h \
  /usr/arm-linux-gnueabihf/include/bits/wchar.h opus_defines.h \
  opus_types.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/limits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/syslimits.h \
  /usr/arm-linux-gnueabihf/include/limits.h \
  /usr/arm-linux-gnueabihf/include/bits/posix1_lim.h \
  /usr/arm-linux-gnueabihf/include/bits/local_lim.h \
  /usr/arm-linux-gnueabihf/include/linux/limits.h \
  /usr/arm-linux-gnueabihf/include/bits/posix2_lim.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h \
  celt/ecintrin.h /usr/arm-linux-gnueabihf/include/math.h \
- /usr/arm-linux-gnueabihf/include/bits/math-vector.h \
- /usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_val.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_valf.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_vall.h \
@@ -36,7 +34,7 @@ celt/entcode.h:
 
 opus_types.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h:
 
 /usr/arm-linux-gnueabihf/include/stdint.h:
 
@@ -56,9 +54,9 @@ opus_defines.h:
 
 opus_types.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/limits.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/syslimits.h:
 
 /usr/arm-linux-gnueabihf/include/limits.h:
 
@@ -70,15 +68,11 @@ opus_types.h:
 
 /usr/arm-linux-gnueabihf/include/bits/posix2_lim.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h:
 
 celt/ecintrin.h:
 
 /usr/arm-linux-gnueabihf/include/math.h:
-
-/usr/arm-linux-gnueabihf/include/bits/math-vector.h:
-
-/usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h:
 
 /usr/arm-linux-gnueabihf/include/bits/huge_val.h:
 

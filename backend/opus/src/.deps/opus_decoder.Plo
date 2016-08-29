@@ -1,7 +1,7 @@
 src/opus_decoder.lo: src/opus_decoder.c \
  /usr/arm-linux-gnueabihf/include/stdc-predef.h config.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h celt/celt.h \
- opus_types.h /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdarg.h celt/celt.h \
+ opus_types.h /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/features.h \
  /usr/arm-linux-gnueabihf/include/sys/cdefs.h \
@@ -10,17 +10,16 @@ src/opus_decoder.lo: src/opus_decoder.c \
  /usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h \
  /usr/arm-linux-gnueabihf/include/bits/wchar.h opus_defines.h \
  opus_types.h opus_custom.h opus_defines.h celt/entenc.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h celt/entcode.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h \
+ celt/entcode.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/limits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/syslimits.h \
  /usr/arm-linux-gnueabihf/include/limits.h \
  /usr/arm-linux-gnueabihf/include/bits/posix1_lim.h \
  /usr/arm-linux-gnueabihf/include/bits/local_lim.h \
  /usr/arm-linux-gnueabihf/include/linux/limits.h \
  /usr/arm-linux-gnueabihf/include/bits/posix2_lim.h celt/ecintrin.h \
  /usr/arm-linux-gnueabihf/include/math.h \
- /usr/arm-linux-gnueabihf/include/bits/math-vector.h \
- /usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_val.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_valf.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_vall.h \
@@ -49,7 +48,7 @@ src/opus_decoder.lo: src/opus_decoder.c \
  /usr/arm-linux-gnueabihf/include/alloca.h \
  /usr/arm-linux-gnueabihf/include/bits/stdlib-float.h celt/cpu_support.h \
  celt/arm/armcpu.h silk/API.h silk/control.h silk/typedef.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/float.h silk/errors.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/float.h silk/errors.h \
  celt/entenc.h celt/stack_alloc.h celt/float_cast.h src/opus_private.h \
  celt/arch.h celt/os_support.h /usr/arm-linux-gnueabihf/include/string.h \
  /usr/arm-linux-gnueabihf/include/xlocale.h \
@@ -68,13 +67,13 @@ src/opus_decoder.lo: src/opus_decoder.c \
 
 config.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdarg.h:
 
 celt/celt.h:
 
 opus_types.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h:
 
 /usr/arm-linux-gnueabihf/include/stdint.h:
 
@@ -100,13 +99,13 @@ opus_defines.h:
 
 celt/entenc.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h:
 
 celt/entcode.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/limits.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/syslimits.h:
 
 /usr/arm-linux-gnueabihf/include/limits.h:
 
@@ -121,10 +120,6 @@ celt/entcode.h:
 celt/ecintrin.h:
 
 /usr/arm-linux-gnueabihf/include/math.h:
-
-/usr/arm-linux-gnueabihf/include/bits/math-vector.h:
-
-/usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h:
 
 /usr/arm-linux-gnueabihf/include/bits/huge_val.h:
 
@@ -204,7 +199,7 @@ silk/control.h:
 
 silk/typedef.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/float.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/float.h:
 
 silk/errors.h:
 

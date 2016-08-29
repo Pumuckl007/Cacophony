@@ -6,16 +6,14 @@ silk/PLC.lo: silk/PLC.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/bits/wordsize.h \
  /usr/arm-linux-gnueabihf/include/gnu/stubs.h \
  /usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h \
  /usr/arm-linux-gnueabihf/include/xlocale.h silk/typedef.h opus_types.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/bits/wchar.h opus_defines.h \
- opus_types.h /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/float.h \
+ opus_types.h /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/float.h \
  silk/resampler_structs.h silk/macros.h celt/arch.h celt/ecintrin.h \
  /usr/arm-linux-gnueabihf/include/math.h \
- /usr/arm-linux-gnueabihf/include/bits/math-vector.h \
- /usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_val.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_valf.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_vall.h \
@@ -23,8 +21,8 @@ silk/PLC.lo: silk/PLC.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/bits/nan.h \
  /usr/arm-linux-gnueabihf/include/bits/mathdef.h \
  /usr/arm-linux-gnueabihf/include/bits/mathcalls.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/limits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/syslimits.h \
  /usr/arm-linux-gnueabihf/include/limits.h \
  /usr/arm-linux-gnueabihf/include/bits/posix1_lim.h \
  /usr/arm-linux-gnueabihf/include/bits/local_lim.h \
@@ -37,7 +35,7 @@ silk/PLC.lo: silk/PLC.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/libio.h \
  /usr/arm-linux-gnueabihf/include/_G_config.h \
  /usr/arm-linux-gnueabihf/include/wchar.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdarg.h \
  /usr/arm-linux-gnueabihf/include/bits/stdio_lim.h \
  /usr/arm-linux-gnueabihf/include/bits/sys_errlist.h silk/MacroDebug.h \
  silk/define.h silk/errors.h silk/structs.h celt/entenc.h celt/entcode.h \
@@ -64,7 +62,7 @@ silk/SigProc_FIX.h:
 
 /usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h:
 
 /usr/arm-linux-gnueabihf/include/xlocale.h:
 
@@ -72,7 +70,7 @@ silk/typedef.h:
 
 opus_types.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h:
 
 /usr/arm-linux-gnueabihf/include/stdint.h:
 
@@ -82,7 +80,7 @@ opus_defines.h:
 
 opus_types.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/float.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/float.h:
 
 silk/resampler_structs.h:
 
@@ -93,10 +91,6 @@ celt/arch.h:
 celt/ecintrin.h:
 
 /usr/arm-linux-gnueabihf/include/math.h:
-
-/usr/arm-linux-gnueabihf/include/bits/math-vector.h:
-
-/usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h:
 
 /usr/arm-linux-gnueabihf/include/bits/huge_val.h:
 
@@ -112,9 +106,9 @@ celt/ecintrin.h:
 
 /usr/arm-linux-gnueabihf/include/bits/mathcalls.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/limits.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/syslimits.h:
 
 /usr/arm-linux-gnueabihf/include/limits.h:
 
@@ -148,7 +142,7 @@ silk/MacroCount.h:
 
 /usr/arm-linux-gnueabihf/include/wchar.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdarg.h:
 
 /usr/arm-linux-gnueabihf/include/bits/stdio_lim.h:
 

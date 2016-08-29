@@ -29,8 +29,13 @@ var DMS_CHANGED = "DMS_CHANGED";
 var VOICE_CONNECTION_UPDATE = "VOICE_CONNECTION_UPDATE";
 //Fired when the ping is updated
 var PING_UPDATED = "PING_UPDATED";
+//Fired when a bad login was passed
+var BAD_LOGIN = "BAD_LOGIN";
+//Fired when the login completes
+var LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL";
 
-var token = "";
+var token = false;
+var dataBase;
 var websocket;
 var websocketParrent;
 var heartbeatTimer;
@@ -49,7 +54,6 @@ var currentVoiceConnection;
 var voiceUDPConnection;
 
 var init = function(parrent, voiceUDP){
-    getGateway(initContinue1);
     websocketParrent = parrent;
     addEventListener(NEW_GUILD, newGuildQuerry);
     var typingTimer = Qt.createQmlObject("import QtQuick 2.0; Timer {}", websocketParrent);
@@ -68,12 +72,80 @@ var init = function(parrent, voiceUDP){
     })
 }
 
+var setDB = function(db){
+    dataBase = db;
+    db.transaction(function(tx){
+        tx.executeSql('CREATE TABLE IF NOT EXISTS cache(key TEXT UNIQUE, value TEXT)');
+        var table  = tx.executeSql("SELECT * FROM cache WHERE key = 'token'");
+        if (table.rows.length > 0){
+            token = table.rows.item(0).value;
+            var connectingTimer = Qt.createQmlObject("import QtQuick 2.0; Timer {}", websocketParrent);
+            connectingTimer.triggered.connect(function(){
+                fireEvent(LOGIN_SUCCESSFUL);
+                getGateway(initContinue1);
+            });
+            connectingTimer.interval = 10;
+            connectingTimer.repeat = false;
+            connectingTimer.start();
+        }
+    });
+}
+
+var login = function(email, password){
+    if(password && password.trim() !== "" && email && email.trim() !== ""){
+        var msg = {
+            email: email,
+            password: password
+        };
+        aPIRequest("POST", BASE_URL + "/v6/auth/login", finishLogin, msg, true);
+    } else if(email && email.trim() !== "") {
+        token = email;
+        getGateway(initContinue1);
+        fireEvent(LOGIN_SUCCESSFUL);
+        dataBase.transaction(function(tx){
+            tx.executeSql("INSERT INTO cache VALUES(?, ?)", ["token", token]);
+        });
+    } else {
+        return -1;
+    }
+    return 0;
+}
+
+var finishLogin = function(json, status){
+    if(status){
+        fireEvent(BAD_LOGIN, status)
+        return;
+    }
+    fireEvent(LOGIN_SUCCESSFUL);
+    var message = JSON.parse(json);
+    token = message.token;
+    dataBase.transaction(function(tx){
+        tx.executeSql("INSERT INTO cache VALUES(?, ?)", ["token", token]);
+    });
+    getGateway(initContinue1);
+}
+
 var initContinue1 = function(url){
     websocket = createWebsocket(JSON.parse(url).url);
 }
 
-var getGateway = function(callback){
-    aPIRequest("GET", BASE_URL + "/gateway", callback);
+var getGateway = function(){
+    dataBase.transaction(function(tx){
+        var table  = tx.executeSql("SELECT * FROM cache WHERE key = 'gateway'");
+        if (table.rows.length > 0){
+            var url = table.rows.item(0).value;
+            initContinue1(JSON.stringify({url:url}));
+        } else {
+            aPIRequest("GET", BASE_URL + "/gateway", cacheGateway);
+        }
+    });
+}
+
+var cacheGateway= function(url){
+    dataBase.transaction(function(tx){
+        tx.executeSql("INSERT INTO cache VALUES(?, ?)", ["gateway", JSON.parse(url).url]);
+        initContinue1(url);
+    });
 }
 
 var createWebsocket = function(url, stsChanged, msgRecived){
@@ -235,16 +307,22 @@ var handleEvent = function(object){
     }
 }
 
-var aPIRequest = function(type, url, callback, fourth){
+var aPIRequest = function(type, url, callback, fourth, callOnError){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange=function(error) {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             if(callback && typeof callback === 'function')
                 callback(xmlhttp.responseText);
+        } else if(callOnError && xmlhttp.readyState === 4){
+            callback("", xmlhttp.status);
+
+        } else if(xmlhttp.readyState ===4){
+            console.log(xmlhttp.statusText + " " + type + " " + url + " " + fourth + " " + JSON.stringify(fourth));
         }
     }
     xmlhttp.open(type, url, true);
-    xmlhttp.setRequestHeader('user-agent', "DiscordBot (https://github.com/Pumuckl007/Cacophony, 0.1)" );
+    if(!callOnError)
+        xmlhttp.setRequestHeader('user-agent', "DiscordBot (https://github.com/Pumuckl007/Cacophony, 0.1)" );
     xmlhttp.setRequestHeader('content-type', 'application/json');
     if(token)
         xmlhttp.setRequestHeader('authorization', (user ? (user.bot ? "Bot " : "") : "") + token);

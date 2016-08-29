@@ -1,7 +1,7 @@
 celt/arm/armcpu.lo: celt/arm/armcpu.c \
  /usr/arm-linux-gnueabihf/include/stdc-predef.h config.h \
  celt/arm/armcpu.h celt/cpu_support.h opus_types.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/features.h \
  /usr/arm-linux-gnueabihf/include/sys/cdefs.h \
@@ -11,7 +11,7 @@ celt/arm/armcpu.lo: celt/arm/armcpu.c \
  /usr/arm-linux-gnueabihf/include/bits/wchar.h opus_defines.h \
  opus_types.h celt/arm/armcpu.h celt/os_support.h \
  /usr/arm-linux-gnueabihf/include/string.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h \
  /usr/arm-linux-gnueabihf/include/xlocale.h \
  /usr/arm-linux-gnueabihf/include/stdio.h \
  /usr/arm-linux-gnueabihf/include/bits/types.h \
@@ -19,7 +19,7 @@ celt/arm/armcpu.lo: celt/arm/armcpu.c \
  /usr/arm-linux-gnueabihf/include/libio.h \
  /usr/arm-linux-gnueabihf/include/_G_config.h \
  /usr/arm-linux-gnueabihf/include/wchar.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdarg.h \
  /usr/arm-linux-gnueabihf/include/bits/stdio_lim.h \
  /usr/arm-linux-gnueabihf/include/bits/sys_errlist.h \
  /usr/arm-linux-gnueabihf/include/stdlib.h \
@@ -50,7 +50,7 @@ celt/cpu_support.h:
 
 opus_types.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h:
 
 /usr/arm-linux-gnueabihf/include/stdint.h:
 
@@ -76,7 +76,7 @@ celt/os_support.h:
 
 /usr/arm-linux-gnueabihf/include/string.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h:
 
 /usr/arm-linux-gnueabihf/include/xlocale.h:
 
@@ -92,7 +92,7 @@ celt/os_support.h:
 
 /usr/arm-linux-gnueabihf/include/wchar.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdarg.h:
 
 /usr/arm-linux-gnueabihf/include/bits/stdio_lim.h:
 

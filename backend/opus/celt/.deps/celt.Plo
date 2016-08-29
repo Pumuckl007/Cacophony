@@ -1,6 +1,6 @@
 celt/celt.lo: celt/celt.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  config.h celt/os_support.h opus_types.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/features.h \
  /usr/arm-linux-gnueabihf/include/sys/cdefs.h \
@@ -9,7 +9,7 @@ celt/celt.lo: celt/celt.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/gnu/stubs-hard.h \
  /usr/arm-linux-gnueabihf/include/bits/wchar.h opus_defines.h \
  opus_types.h /usr/arm-linux-gnueabihf/include/string.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h \
  /usr/arm-linux-gnueabihf/include/xlocale.h \
  /usr/arm-linux-gnueabihf/include/stdio.h \
  /usr/arm-linux-gnueabihf/include/bits/types.h \
@@ -17,7 +17,7 @@ celt/celt.lo: celt/celt.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/libio.h \
  /usr/arm-linux-gnueabihf/include/_G_config.h \
  /usr/arm-linux-gnueabihf/include/wchar.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdarg.h \
  /usr/arm-linux-gnueabihf/include/bits/stdio_lim.h \
  /usr/arm-linux-gnueabihf/include/bits/sys_errlist.h \
  /usr/arm-linux-gnueabihf/include/stdlib.h \
@@ -38,8 +38,6 @@ celt/celt.lo: celt/celt.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/alloca.h \
  /usr/arm-linux-gnueabihf/include/bits/stdlib-float.h celt/mdct.h \
  celt/kiss_fft.h /usr/arm-linux-gnueabihf/include/math.h \
- /usr/arm-linux-gnueabihf/include/bits/math-vector.h \
- /usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_val.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_valf.h \
  /usr/arm-linux-gnueabihf/include/bits/huge_vall.h \
@@ -49,8 +47,8 @@ celt/celt.lo: celt/celt.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/bits/mathcalls.h celt/arch.h \
  celt/cpu_support.h celt/arm/armcpu.h celt/celt.h opus_custom.h \
  opus_defines.h celt/entenc.h celt/entcode.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/limits.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/syslimits.h \
  /usr/arm-linux-gnueabihf/include/limits.h \
  /usr/arm-linux-gnueabihf/include/bits/posix1_lim.h \
  /usr/arm-linux-gnueabihf/include/bits/local_lim.h \
@@ -69,7 +67,7 @@ celt/os_support.h:
 
 opus_types.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h:
 
 /usr/arm-linux-gnueabihf/include/stdint.h:
 
@@ -91,7 +89,7 @@ opus_types.h:
 
 /usr/arm-linux-gnueabihf/include/string.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stddef.h:
 
 /usr/arm-linux-gnueabihf/include/xlocale.h:
 
@@ -107,7 +105,7 @@ opus_types.h:
 
 /usr/arm-linux-gnueabihf/include/wchar.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdarg.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdarg.h:
 
 /usr/arm-linux-gnueabihf/include/bits/stdio_lim.h:
 
@@ -153,10 +151,6 @@ celt/kiss_fft.h:
 
 /usr/arm-linux-gnueabihf/include/math.h:
 
-/usr/arm-linux-gnueabihf/include/bits/math-vector.h:
-
-/usr/arm-linux-gnueabihf/include/bits/libm-simd-decl-stubs.h:
-
 /usr/arm-linux-gnueabihf/include/bits/huge_val.h:
 
 /usr/arm-linux-gnueabihf/include/bits/huge_valf.h:
@@ -187,9 +181,9 @@ celt/entenc.h:
 
 celt/entcode.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/limits.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/limits.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include-fixed/syslimits.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include-fixed/syslimits.h:
 
 /usr/arm-linux-gnueabihf/include/limits.h:
 

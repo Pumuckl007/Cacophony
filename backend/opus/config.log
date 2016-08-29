@@ -27,8 +27,8 @@ uname -v = #53-Ubuntu SMP Wed Jul 27 16:06:39 UTC 2016
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
-PATH: /usr/lib/x86_64-linux-gnu/qt5/bin
-PATH: /usr/bin
+PATH: /var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib/x86_64-linux-gnu/qt5/bin
+PATH: /home/max/.config/QtProject/qtcreator/ubuntu-sdk/ubuntu-sdk-15.04-armhf
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
 PATH: /usr/sbin
@@ -71,12 +71,11 @@ configure:3126: result: printf
 configure:3159: checking for style of include used by make
 configure:3187: result: GNU
 configure:3218: checking for arm-linux-gnueabihf-gcc
-configure:3234: found /usr/bin/arm-linux-gnueabihf-gcc
 configure:3245: result: arm-linux-gnueabihf-gcc
 configure:3514: checking for C compiler version
 configure:3523: arm-linux-gnueabihf-gcc --version >&5
-arm-linux-gnueabihf-gcc (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.1) 5.4.0 20160609
-Copyright (C) 2015 Free Software Foundation, Inc.
+arm-linux-gnueabihf-gcc (Ubuntu/Linaro 4.9.2-10ubuntu10) 4.9.2
+Copyright (C) 2014 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -84,22 +83,24 @@ configure:3534: $? = 0
 configure:3523: arm-linux-gnueabihf-gcc -v >&5
 Using built-in specs.
 COLLECT_GCC=arm-linux-gnueabihf-gcc
-COLLECT_LTO_WRAPPER=/usr/lib/gcc-cross/arm-linux-gnueabihf/5/lto-wrapper
+COLLECT_LTO_WRAPPER=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/lto-wrapper
 Target: arm-linux-gnueabihf
-Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.1' --with-bugurl=file:///usr/share/doc/gcc-5/README.Bugs --enable-languages=c,ada,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-5 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-5-armhf-cross/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-5-armhf-cross --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-5-armhf-cross --with-arch-directory=arm --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libgcj --enable-objc-gc --enable-multiarch --enable-multilib --disable-sjlj-exceptions --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb --disable-werror --enable-multilib --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabihf --program-prefix=arm-linux-gnueabihf- --includedir=/usr/arm-linux-gnueabihf/include
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.9.2-10ubuntu10' --with-bugurl=file:///var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/include/c++/4.9.2 --libdir=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libitm --disable-libquadmath --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib/jvm/java-1.5.0-gcj-4.9-armhf-cross/jre --enable-java-home --with-jvm-root-dir=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib/jvm/java-1.5.0-gcj-4.9-armhf-cross --with-jvm-jar-dir=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-armhf-cross --with-arch-directory=arm --with-ecj-jar=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/share/java/eclipse-ecj.jar --disable-libgcj --enable-objc-gc --enable-multiarch --enable-multilib --disable-sjlj-exceptions --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb --disable-werror --enable-multilib --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabihf --program-prefix=arm-linux-gnueabihf- --includedir=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/include
 Thread model: posix
-gcc version 5.4.0 20160609 (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.1) 
+gcc version 4.9.2 (Ubuntu/Linaro 4.9.2-10ubuntu10) 
 configure:3534: $? = 0
 configure:3523: arm-linux-gnueabihf-gcc -V >&5
 arm-linux-gnueabihf-gcc: error: unrecognized command line option '-V'
 arm-linux-gnueabihf-gcc: fatal error: no input files
 compilation terminated.
-configure:3534: $? = 1
+Command returned 4: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_HOST_ARCH_OS=linux DEB_TARGET_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_ARCH_BITS=32 DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_HOST_GNU_SYSTEM=linux-gnueabihf DEB_HOST_ARCH=armhf DEB_HOST_GNU_CPU=arm DEB_HOST_ARCH_ENDIAN=little DEB_BUILD_ARCH=amd64 DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_HOST_ARCH_CPU=arm DEB_TARGET_ARCH=armhf DEB_BUILD_GNU_CPU=x86_64 DEB_TARGET_ARCH_OS=linux DEB_BUILD_ARCH_OS=linux DEB_TARGET_ARCH_ENDIAN=little DEB_TARGET_ARCH_CPU=arm DEB_HOST_GNU_TYPE=arm-linux-gnueabihf DEB_HOST_ARCH_BITS=32 DEB_BUILD_GNU_SYSTEM=linux-gnu DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_BUILD_ARCH_BITS=64 DEB_BUILD_ARCH_CPU=amd64 DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_GNU_CPU=arm DEB_BUILD_ARCH_ENDIAN=little arm-linux-gnueabihf-gcc -V
+configure:3534: $? = 4
 configure:3523: arm-linux-gnueabihf-gcc -qversion >&5
 arm-linux-gnueabihf-gcc: error: unrecognized command line option '-qversion'
 arm-linux-gnueabihf-gcc: fatal error: no input files
 compilation terminated.
-configure:3534: $? = 1
+Command returned 4: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_BUILD_ARCH_OS=linux DEB_HOST_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_ARCH_BITS=64 DEB_HOST_ARCH_BITS=32 DEB_TARGET_ARCH=armhf DEB_BUILD_GNU_SYSTEM=linux-gnu DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_BUILD_GNU_CPU=x86_64 DEB_HOST_ARCH_ENDIAN=little DEB_BUILD_ARCH=amd64 DEB_TARGET_ARCH_BITS=32 DEB_TARGET_ARCH_OS=linux DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_HOST_ARCH_OS=linux DEB_HOST_ARCH_CPU=arm DEB_BUILD_ARCH_ENDIAN=little DEB_TARGET_GNU_CPU=arm DEB_TARGET_ARCH_CPU=arm DEB_HOST_ARCH=armhf DEB_TARGET_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_HOST_GNU_CPU=arm DEB_BUILD_ARCH_CPU=amd64 DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_TARGET_ARCH_ENDIAN=little DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_HOST_GNU_TYPE=arm-linux-gnueabihf arm-linux-gnueabihf-gcc -qversion
+configure:3534: $? = 4
 configure:3554: checking whether the C compiler works
 configure:3576: arm-linux-gnueabihf-gcc -fPIC   conftest.c  >&5
 configure:3580: $? = 0
@@ -150,9 +151,9 @@ configure:4393: result: /bin/grep -E
 configure:4398: checking for fgrep
 configure:4460: result: /bin/grep -F
 configure:4495: checking for ld used by arm-linux-gnueabihf-gcc
-configure:4562: result: /usr/arm-linux-gnueabihf/bin/ld
-configure:4569: checking if the linker (/usr/arm-linux-gnueabihf/bin/ld) is GNU ld
-configure:4584: result: yes
+configure:4562: result: /var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/bin/ld
+configure:4569: checking if the linker (/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/bin/ld) is GNU ld
+configure:4584: result: no
 configure:4596: checking for BSD- or MS-compatible name lister (nm)
 configure:4650: result: /usr/bin/arm-linux-gnueabihf-nm -B
 configure:4780: checking the name lister (/usr/bin/arm-linux-gnueabihf-nm -B) interface
@@ -169,7 +170,7 @@ configure:4994: checking how to convert x86_64-unknown-linux-gnu file names to a
 configure:5034: result: func_convert_file_noop
 configure:5041: checking how to convert x86_64-unknown-linux-gnu file names to toolchain format
 configure:5061: result: func_convert_file_noop
-configure:5068: checking for /usr/arm-linux-gnueabihf/bin/ld option to reload object files
+configure:5068: checking for /var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/bin/ld option to reload object files
 configure:5075: result: -r
 configure:5109: checking for arm-linux-gnueabihf-objdump
 configure:5125: found /usr/bin/arm-linux-gnueabihf-objdump
@@ -229,7 +230,10 @@ configure:7546: arm-linux-gnueabihf-gcc -E  conftest.c
 configure:7546: $? = 0
 configure:7560: arm-linux-gnueabihf-gcc -E  conftest.c
 conftest.c:9:28: fatal error: ac_nonexistent.h: No such file or directory
+ #include <ac_nonexistent.h>
+                            ^
 compilation terminated.
+Command returned 1: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_HOST_ARCH_ENDIAN=little DEB_TARGET_ARCH_BITS=32 DEB_BUILD_ARCH_ENDIAN=little DEB_HOST_GNU_CPU=arm DEB_BUILD_ARCH=amd64 DEB_BUILD_ARCH_CPU=amd64 DEB_BUILD_GNU_SYSTEM=linux-gnu DEB_BUILD_ARCH_OS=linux DEB_TARGET_ARCH_CPU=arm DEB_BUILD_ARCH_BITS=64 DEB_HOST_GNU_TYPE=arm-linux-gnueabihf DEB_HOST_ARCH_OS=linux DEB_TARGET_ARCH_OS=linux DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_HOST_ARCH_CPU=arm DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_TARGET_ARCH_ENDIAN=little DEB_HOST_GNU_SYSTEM=linux-gnueabihf DEB_TARGET_GNU_CPU=arm DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_BUILD_GNU_CPU=x86_64 DEB_TARGET_MULTIARCH=arm-linux-gnueabihf DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_HOST_ARCH=armhf DEB_HOST_ARCH_BITS=32 DEB_TARGET_ARCH=armhf arm-linux-gnueabihf-gcc -E conftest.c
 configure:7560: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -246,7 +250,10 @@ configure:7605: arm-linux-gnueabihf-gcc -E  conftest.c
 configure:7605: $? = 0
 configure:7619: arm-linux-gnueabihf-gcc -E  conftest.c
 conftest.c:9:28: fatal error: ac_nonexistent.h: No such file or directory
+ #include <ac_nonexistent.h>
+                            ^
 compilation terminated.
+Command returned 1: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_HOST_ARCH_ENDIAN=little DEB_TARGET_ARCH_BITS=32 DEB_TARGET_ARCH_CPU=arm DEB_HOST_GNU_CPU=arm DEB_TARGET_GNU_CPU=arm DEB_BUILD_ARCH_CPU=amd64 DEB_HOST_ARCH_CPU=arm DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_TARGET_ARCH_ENDIAN=little DEB_TARGET_ARCH=armhf DEB_BUILD_ARCH_ENDIAN=little DEB_BUILD_GNU_CPU=x86_64 DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_HOST_ARCH=armhf DEB_BUILD_ARCH_OS=linux DEB_HOST_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_HOST_GNU_TYPE=arm-linux-gnueabihf DEB_BUILD_ARCH_BITS=64 DEB_HOST_ARCH_BITS=32 DEB_BUILD_ARCH=amd64 DEB_BUILD_GNU_SYSTEM=linux-gnu DEB_TARGET_ARCH_OS=linux DEB_HOST_ARCH_OS=linux DEB_TARGET_MULTIARCH=arm-linux-gnueabihf arm-linux-gnueabihf-gcc -E conftest.c
 configure:7619: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -323,20 +330,14 @@ configure:8854: $? = 0
 configure:8876: result: yes
 configure:8884: checking if arm-linux-gnueabihf-gcc supports -c -o file.o
 configure:8931: result: yes
-configure:8964: checking whether the arm-linux-gnueabihf-gcc linker (/usr/arm-linux-gnueabihf/bin/ld) supports shared libraries
+configure:8964: checking whether the arm-linux-gnueabihf-gcc linker (/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/bin/ld) supports shared libraries
 configure:10223: result: yes
-configure:10260: checking whether -lc should be explicitly linked in
-configure:10268: arm-linux-gnueabihf-gcc -c -fPIC  conftest.c >&5
-configure:10271: $? = 0
-configure:10286: arm-linux-gnueabihf-gcc -shared  -fPIC -DPIC conftest.o  -v -Wl,-soname -Wl,conftest -o conftest 2\>\&1 \| /bin/grep  -lc  \>/dev/null 2\>\&1
-configure:10289: $? = 0
-configure:10303: result: no
 configure:10463: checking dynamic linker characteristics
-configure:11044: arm-linux-gnueabihf-gcc -o conftest -fPIC   -Wl,-rpath -Wl,/foo conftest.c  >&5
+configure:11044: arm-linux-gnueabihf-gcc -o conftest -fPIC    conftest.c  >&5
 configure:11044: $? = 0
 configure:11284: result: GNU/Linux ld.so
 configure:11406: checking how to hardcode library paths into programs
-configure:11431: result: immediate
+configure:11431: result: unsupported
 configure:11979: checking whether stripping libraries is possible
 configure:11984: result: yes
 configure:12019: checking if libtool supports shared libraries
@@ -347,49 +348,223 @@ configure:12052: checking whether to build static libraries
 configure:12056: result: yes
 configure:12095: checking for arm-linux-gnueabihf-gcc option to accept ISO C99
 configure:12244: arm-linux-gnueabihf-gcc  -c -fPIC  conftest.c >&5
+conftest.c:71:29: error: expected ';', ',' or ')' before 'text'
+ test_restrict (ccp restrict text)
+                             ^
+conftest.c: In function 'main':
+conftest.c:125:18: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'newvar'
+   char *restrict newvar = "Another string";
+                  ^
+conftest.c:125:18: error: 'newvar' undeclared (first use in this function)
+conftest.c:125:18: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:135:3: error: 'for' loop initial declarations are only allowed in C99 or C11 mode
+   for (int i = 0; i < ia->datasize; ++i)
+   ^
+conftest.c:135:3: note: use option -std=c99, -std=gnu99, -std=c11 or -std=gnu11 to compile your code
+Command returned 1: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_TARGET_ARCH_CPU=arm DEB_BUILD_ARCH_CPU=amd64 DEB_HOST_GNU_CPU=arm DEB_HOST_ARCH_ENDIAN=little DEB_HOST_ARCH_BITS=32 DEB_BUILD_ARCH=amd64 DEB_BUILD_ARCH_BITS=64 DEB_HOST_GNU_TYPE=arm-linux-gnueabihf DEB_TARGET_ARCH_BITS=32 DEB_TARGET_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_ARCH_ENDIAN=little DEB_TARGET_ARCH_OS=linux DEB_HOST_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_GNU_CPU=x86_64 DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_ARCH_OS=linux DEB_BUILD_ARCH_ENDIAN=little DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_TARGET_GNU_CPU=arm DEB_HOST_ARCH_OS=linux DEB_HOST_ARCH_CPU=arm DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_BUILD_GNU_SYSTEM=linux-gnu DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_ARCH=armhf DEB_HOST_ARCH=armhf arm-linux-gnueabihf-gcc -c -fPIC conftest.c
+configure:12244: $? = 1
+configure: failed program was:
+| /* confdefs.h */
+| #define PACKAGE_NAME "opus"
+| #define PACKAGE_TARNAME "opus"
+| #define PACKAGE_VERSION "1.1.3"
+| #define PACKAGE_STRING "opus 1.1.3"
+| #define PACKAGE_BUGREPORT "opus@xiph.org"
+| #define PACKAGE_URL ""
+| #define STDC_HEADERS 1
+| #define HAVE_SYS_TYPES_H 1
+| #define HAVE_SYS_STAT_H 1
+| #define HAVE_STDLIB_H 1
+| #define HAVE_STRING_H 1
+| #define HAVE_MEMORY_H 1
+| #define HAVE_STRINGS_H 1
+| #define HAVE_INTTYPES_H 1
+| #define HAVE_STDINT_H 1
+| #define HAVE_UNISTD_H 1
+| #define HAVE_DLFCN_H 1
+| #define LT_OBJDIR ".libs/"
+| /* end confdefs.h.  */
+| #include <stdarg.h>
+| #include <stdbool.h>
+| #include <stdlib.h>
+| #include <wchar.h>
+| #include <stdio.h>
+| 
+| // Check varargs macros.  These examples are taken from C99 6.10.3.5.
+| #define debug(...) fprintf (stderr, __VA_ARGS__)
+| #define showlist(...) puts (#__VA_ARGS__)
+| #define report(test,...) ((test) ? puts (#test) : printf (__VA_ARGS__))
+| static void
+| test_varargs_macros (void)
+| {
+|   int x = 1234;
+|   int y = 5678;
+|   debug ("Flag");
+|   debug ("X = %d\n", x);
+|   showlist (The first, second, and third items.);
+|   report (x>y, "x is %d but y is %d", x, y);
+| }
+| 
+| // Check long long types.
+| #define BIG64 18446744073709551615ull
+| #define BIG32 4294967295ul
+| #define BIG_OK (BIG64 / BIG32 == 4294967297ull && BIG64 % BIG32 == 0)
+| #if !BIG_OK
+|   your preprocessor is broken;
+| #endif
+| #if BIG_OK
+| #else
+|   your preprocessor is broken;
+| #endif
+| static long long int bignum = -9223372036854775807LL;
+| static unsigned long long int ubignum = BIG64;
+| 
+| struct incomplete_array
+| {
+|   int datasize;
+|   double data[];
+| };
+| 
+| struct named_init {
+|   int number;
+|   const wchar_t *name;
+|   double average;
+| };
+| 
+| typedef const char *ccp;
+| 
+| static inline int
+| test_restrict (ccp restrict text)
+| {
+|   // See if C++-style comments work.
+|   // Iterate through items via the restricted pointer.
+|   // Also check for declarations in for loops.
+|   for (unsigned int i = 0; *(text+i) != '\0'; ++i)
+|     continue;
+|   return 0;
+| }
+| 
+| // Check varargs and va_copy.
+| static void
+| test_varargs (const char *format, ...)
+| {
+|   va_list args;
+|   va_start (args, format);
+|   va_list args_copy;
+|   va_copy (args_copy, args);
+| 
+|   const char *str;
+|   int number;
+|   float fnumber;
+| 
+|   while (*format)
+|     {
+|       switch (*format++)
+| 	{
+| 	case 's': // string
+| 	  str = va_arg (args_copy, const char *);
+| 	  break;
+| 	case 'd': // int
+| 	  number = va_arg (args_copy, int);
+| 	  break;
+| 	case 'f': // float
+| 	  fnumber = va_arg (args_copy, double);
+| 	  break;
+| 	default:
+| 	  break;
+| 	}
+|     }
+|   va_end (args_copy);
+|   va_end (args);
+| }
+| 
+| int
+| main ()
+| {
+| 
+|   // Check bool.
+|   _Bool success = false;
+| 
+|   // Check restrict.
+|   if (test_restrict ("String literal") == 0)
+|     success = true;
+|   char *restrict newvar = "Another string";
+| 
+|   // Check varargs.
+|   test_varargs ("s, d' f .", "string", 65, 34.234);
+|   test_varargs_macros ();
+| 
+|   // Check flexible array members.
+|   struct incomplete_array *ia =
+|     malloc (sizeof (struct incomplete_array) + (sizeof (double) * 10));
+|   ia->datasize = 10;
+|   for (int i = 0; i < ia->datasize; ++i)
+|     ia->data[i] = i * 1.234;
+| 
+|   // Check named initializers.
+|   struct named_init ni = {
+|     .number = 34,
+|     .name = L"Test wide string",
+|     .average = 543.34343,
+|   };
+| 
+|   ni.number = 58;
+| 
+|   int dynamic_array[ni.number];
+|   dynamic_array[ni.number - 1] = 543;
+| 
+|   // work around unused variable warnings
+|   return (!success || bignum == 0LL || ubignum == 0uLL || newvar[0] == 'x'
+| 	  || dynamic_array[ni.number - 1] != 543);
+| 
+|   ;
+|   return 0;
+| }
+configure:12244: arm-linux-gnueabihf-gcc -std=gnu99 -c -fPIC  conftest.c >&5
 configure:12244: $? = 0
-configure:12257: result: none needed
+configure:12264: result: -std=gnu99
 configure:12272: checking for an ANSI C-conforming const
-configure:12338: arm-linux-gnueabihf-gcc -c -fPIC  conftest.c >&5
+configure:12338: arm-linux-gnueabihf-gcc -std=gnu99 -c -fPIC  conftest.c >&5
 configure:12338: $? = 0
 configure:12345: result: yes
 configure:12353: checking for inline
-configure:12369: arm-linux-gnueabihf-gcc -c -fPIC  conftest.c >&5
+configure:12369: arm-linux-gnueabihf-gcc -std=gnu99 -c -fPIC  conftest.c >&5
 configure:12369: $? = 0
 configure:12377: result: inline
-configure:12405: checking dependency style of arm-linux-gnueabihf-gcc
+configure:12405: checking dependency style of arm-linux-gnueabihf-gcc -std=gnu99
 configure:12514: result: gcc3
 configure:12538: checking for C/C++ restrict keyword
-configure:12563: arm-linux-gnueabihf-gcc -c -fPIC  conftest.c >&5
+configure:12563: arm-linux-gnueabihf-gcc -std=gnu99 -c -fPIC  conftest.c >&5
 configure:12563: $? = 0
 configure:12571: result: __restrict
 configure:12586: checking for C99 variable-size arrays
-configure:12599: arm-linux-gnueabihf-gcc -c -fPIC  conftest.c >&5
+configure:12599: arm-linux-gnueabihf-gcc -std=gnu99 -c -fPIC  conftest.c >&5
 configure:12599: $? = 0
 configure:12612: result: yes
 configure:12747: checking for cos in -lm
-configure:12772: arm-linux-gnueabihf-gcc -o conftest -fPIC   conftest.c -lm   >&5
+configure:12772: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC   conftest.c -lm   >&5
 conftest.c:31:6: warning: conflicting types for built-in function 'cos'
  char cos ();
       ^
 configure:12772: $? = 0
 configure:12781: result: yes
 configure:13516: checking if compiler supports ARM Neon intrinsics
-configure:13535: arm-linux-gnueabihf-gcc -o conftest -fPIC   conftest.c  >&5
+configure:13535: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC   conftest.c  >&5
 In file included from conftest.c:24:0:
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/arm_neon.h:31:2: error: #error You must enable NEON instructions (e.g. -mfloat-abi=softfp -mfpu=neon) to use arm_neon.h
+/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/arm_neon.h:31:2: error: #error You must enable NEON instructions (e.g. -mfloat-abi=softfp -mfpu=neon) to use arm_neon.h
  #error You must enable NEON instructions (e.g. -mfloat-abi=softfp -mfpu=neon) to use arm_neon.h
   ^
 conftest.c: In function 'main':
 conftest.c:30:20: error: unknown type name 'float32x4_t'
              static float32x4_t A0, A1, SUMM;
                     ^
-conftest.c:31:20: warning: implicit declaration of function 'vmlaq_f32' [-Wimplicit-function-declaration]
+conftest.c:31:13: warning: implicit declaration of function 'vmlaq_f32' [-Wimplicit-function-declaration]
              SUMM = vmlaq_f32(SUMM, A0, A1);
-                    ^
-conftest.c:32:25: warning: implicit declaration of function 'vgetq_lane_f32' [-Wimplicit-function-declaration]
+             ^
+conftest.c:32:13: warning: implicit declaration of function 'vgetq_lane_f32' [-Wimplicit-function-declaration]
              return (int)vgetq_lane_f32(SUMM, 0);
-                         ^
+             ^
+Command returned 1: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_TARGET_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_TARGET_ARCH_ENDIAN=little DEB_HOST_ARCH_BITS=32 DEB_HOST_GNU_TYPE=arm-linux-gnueabihf DEB_HOST_ARCH_ENDIAN=little DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_HOST_ARCH_CPU=arm DEB_HOST_ARCH=armhf DEB_TARGET_ARCH_OS=linux DEB_BUILD_ARCH_ENDIAN=little DEB_HOST_GNU_CPU=arm DEB_HOST_ARCH_OS=linux DEB_BUILD_ARCH_BITS=64 DEB_BUILD_ARCH_OS=linux DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_BUILD_ARCH_CPU=amd64 DEB_BUILD_ARCH=amd64 DEB_HOST_GNU_SYSTEM=linux-gnueabihf DEB_TARGET_ARCH=armhf DEB_TARGET_ARCH_CPU=arm DEB_TARGET_GNU_CPU=arm DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_ARCH_BITS=32 DEB_BUILD_GNU_CPU=x86_64 DEB_BUILD_GNU_SYSTEM=linux-gnu arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC conftest.c
 configure:13535: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -431,13 +606,16 @@ configure: failed program was:
 | }
 configure:13545: result: no
 configure:13547: checking if compiler supports ARM Neon intrinsics with -mfpu=neon
-configure:13567: arm-linux-gnueabihf-gcc -o conftest -fPIC -mfpu=neon   conftest.c  >&5
+configure:13567: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC -mfpu=neon   conftest.c  >&5
 configure:13567: $? = 0
 configure:13569: result: yes
 configure:13667: checking for NE10
-configure:13689: arm-linux-gnueabihf-gcc -o conftest    conftest.c  -lNE10 -lm >&5
+configure:13689: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest    conftest.c  -lNE10 -lm >&5
 conftest.c:26:35: fatal error: NE10_init.h: No such file or directory
+             #include <NE10_init.h>
+                                   ^
 compilation terminated.
+Command returned 1: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_BUILD_ARCH_BITS=64 DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_TARGET_ARCH_ENDIAN=little DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_HOST_ARCH=armhf DEB_TARGET_GNU_CPU=arm DEB_HOST_ARCH_BITS=32 DEB_BUILD_ARCH_CPU=amd64 DEB_TARGET_ARCH_CPU=arm DEB_HOST_GNU_TYPE=arm-linux-gnueabihf DEB_BUILD_ARCH_ENDIAN=little DEB_TARGET_ARCH_BITS=32 DEB_HOST_GNU_CPU=arm DEB_HOST_ARCH_OS=linux DEB_TARGET_ARCH=armhf DEB_TARGET_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_ARCH_OS=linux DEB_HOST_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_GNU_SYSTEM=linux-gnu DEB_BUILD_GNU_CPU=x86_64 DEB_BUILD_ARCH=amd64 DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_ARCH_OS=linux DEB_HOST_ARCH_CPU=arm DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_HOST_ARCH_ENDIAN=little arm-linux-gnueabihf-gcc -std=gnu99 -o conftest conftest.c -lNE10 -lm
 configure:13689: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -481,9 +659,9 @@ configure: failed program was:
 | 
 configure:13698: result: no
 configure:13733: checking if compiler supports Aarch64 Neon intrinsics
-configure:13752: arm-linux-gnueabihf-gcc -o conftest -fPIC   conftest.c  >&5
+configure:13752: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC   conftest.c  >&5
 In file included from conftest.c:25:0:
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/arm_neon.h:31:2: error: #error You must enable NEON instructions (e.g. -mfloat-abi=softfp -mfpu=neon) to use arm_neon.h
+/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/arm_neon.h:31:2: error: #error You must enable NEON instructions (e.g. -mfloat-abi=softfp -mfpu=neon) to use arm_neon.h
  #error You must enable NEON instructions (e.g. -mfloat-abi=softfp -mfpu=neon) to use arm_neon.h
   ^
 conftest.c: In function 'main':
@@ -493,9 +671,10 @@ conftest.c:31:23: error: unknown type name 'int32_t'
 conftest.c:32:23: error: unknown type name 'int16_t'
                 static int16_t OUT;
                        ^
-conftest.c:33:22: warning: implicit declaration of function 'vqmovns_s32' [-Wimplicit-function-declaration]
+conftest.c:33:16: warning: implicit declaration of function 'vqmovns_s32' [-Wimplicit-function-declaration]
                 OUT = vqmovns_s32(IN);
-                      ^
+                ^
+Command returned 1: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_TARGET_ARCH_ENDIAN=little DEB_HOST_ARCH_BITS=32 DEB_HOST_ARCH=armhf DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_TARGET_ARCH_BITS=32 DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_HOST_ARCH_OS=linux DEB_TARGET_GNU_CPU=arm DEB_HOST_GNU_TYPE=arm-linux-gnueabihf DEB_BUILD_ARCH_BITS=64 DEB_HOST_ARCH_CPU=arm DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_BUILD_GNU_SYSTEM=linux-gnu DEB_BUILD_GNU_CPU=x86_64 DEB_TARGET_ARCH=armhf DEB_HOST_ARCH_ENDIAN=little DEB_BUILD_ARCH=amd64 DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_TARGET_MULTIARCH=arm-linux-gnueabihf DEB_TARGET_ARCH_OS=linux DEB_TARGET_ARCH_CPU=arm DEB_BUILD_ARCH_CPU=amd64 DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_BUILD_ARCH_OS=linux DEB_HOST_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_ARCH_ENDIAN=little DEB_HOST_GNU_CPU=arm arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC conftest.c
 configure:13752: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -538,14 +717,15 @@ configure: failed program was:
 | }
 configure:13762: result: no
 configure:13764: checking if compiler supports Aarch64 Neon intrinsics with -mfpu=neon
-configure:13784: arm-linux-gnueabihf-gcc -o conftest -fPIC -mfpu=neon   conftest.c  >&5
+configure:13784: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC -mfpu=neon   conftest.c  >&5
 conftest.c: In function 'main':
-conftest.c:33:22: warning: implicit declaration of function 'vqmovns_s32' [-Wimplicit-function-declaration]
+conftest.c:33:16: warning: implicit declaration of function 'vqmovns_s32' [-Wimplicit-function-declaration]
                 OUT = vqmovns_s32(IN);
-                      ^
-/tmp/cc3bdLbm.o: In function `main':
+                ^
+/tmp/ccGTCbXt.o: In function `main':
 conftest.c:(.text+0xc): undefined reference to `vqmovns_s32'
 collect2: error: ld returned 1 exit status
+Command returned 1: schroot -c 'click-ubuntu-sdk-15.04-armhf-ucca-1000-{30ac7c91-724d-4256-9899-1eebcfa10dde}' --run-session -- env DEB_TARGET_ARCH_OS=linux DEB_BUILD_GNU_SYSTEM=linux-gnu DEB_BUILD_ARCH_CPU=amd64 DEB_HOST_GNU_CPU=arm DEB_HOST_ARCH_OS=linux DEB_HOST_ARCH_ENDIAN=little DEB_BUILD_MULTIARCH=x86_64-linux-gnu DEB_HOST_MULTIARCH=arm-linux-gnueabihf DEB_HOST_ARCH_BITS=32 DEB_HOST_ARCH=armhf DEB_BUILD_GNU_TYPE=x86_64-linux-gnu DEB_TARGET_ARCH_BITS=32 DEB_TARGET_ARCH_ENDIAN=little DEB_BUILD_ARCH_OS=linux DEB_BUILD_GNU_CPU=x86_64 DEB_TARGET_GNU_CPU=arm DEB_TARGET_GNU_SYSTEM=linux-gnueabihf DEB_BUILD_ARCH_BITS=64 DEB_HOST_ARCH_CPU=arm DEB_TARGET_GNU_TYPE=arm-linux-gnueabihf DEB_HOST_GNU_TYPE=arm-linux-gnueabihf DEB_BUILD_ARCH_ENDIAN=little DEB_TARGET_ARCH=armhf DEB_TARGET_ARCH_CPU=arm DEB_BUILD_ARCH=amd64 DEB_TARGET_MULTIARCH=arm-linux-gnueabihf DEB_HOST_GNU_SYSTEM=linux-gnueabihf arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC -mfpu=neon conftest.c
 configure:13784: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -589,16 +769,16 @@ configure: failed program was:
 configure:13792: result: no
 configure:14494: checking for doxygen
 configure:14522: result: no
-configure:14566: checking if arm-linux-gnueabihf-gcc supports -fvisibility=hidden
-configure:14572: arm-linux-gnueabihf-gcc -c -fPIC -fvisibility=hidden  conftest.c >&5
+configure:14566: checking if arm-linux-gnueabihf-gcc -std=gnu99 supports -fvisibility=hidden
+configure:14572: arm-linux-gnueabihf-gcc -std=gnu99 -c -fPIC -fvisibility=hidden  conftest.c >&5
 configure:14572: $? = 0
 configure:14573: result: yes
-configure:14588: checking if arm-linux-gnueabihf-gcc supports -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes
-configure:14594: arm-linux-gnueabihf-gcc -c -fPIC -fvisibility=hidden -W -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes  conftest.c >&5
+configure:14588: checking if arm-linux-gnueabihf-gcc -std=gnu99 supports -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes
+configure:14594: arm-linux-gnueabihf-gcc -std=gnu99 -c -fPIC -fvisibility=hidden -W -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes  conftest.c >&5
 configure:14594: $? = 0
 configure:14595: result: yes
 configure:14609: checking for lrintf
-configure:14609: arm-linux-gnueabihf-gcc -o conftest -fPIC -fvisibility=hidden -W -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes   conftest.c  -lm >&5
+configure:14609: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC -fvisibility=hidden -W -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes   conftest.c  -lm >&5
 conftest.c:49:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
  char lrintf ();
  ^
@@ -611,7 +791,7 @@ conftest.c:58:1: warning: function declaration isn't a prototype [-Wstrict-proto
 configure:14609: $? = 0
 configure:14609: result: yes
 configure:14620: checking for lrint
-configure:14620: arm-linux-gnueabihf-gcc -o conftest -fPIC -fvisibility=hidden -W -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes   conftest.c  -lm >&5
+configure:14620: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC -fvisibility=hidden -W -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes   conftest.c  -lm >&5
 conftest.c:50:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
  char lrint ();
  ^
@@ -624,7 +804,7 @@ conftest.c:59:1: warning: function declaration isn't a prototype [-Wstrict-proto
 configure:14620: $? = 0
 configure:14620: result: yes
 configure:14633: checking for __malloc_hook
-configure:14633: arm-linux-gnueabihf-gcc -o conftest -fPIC -fvisibility=hidden -W -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes   conftest.c  >&5
+configure:14633: arm-linux-gnueabihf-gcc -std=gnu99 -o conftest -fPIC -fvisibility=hidden -W -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes   conftest.c  >&5
 conftest.c:51:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
  char __malloc_hook ();
  ^
@@ -652,16 +832,16 @@ generated by GNU Autoconf 2.69.  Invocation command line was
 
 on Io
 
-config.status:1155: creating Makefile
-config.status:1155: creating opus.pc
-config.status:1155: creating opus-uninstalled.pc
-config.status:1155: creating celt/arm/armopts.s
-config.status:1155: creating doc/Makefile
-config.status:1155: creating doc/Doxyfile
-config.status:1155: creating config.h
-config.status:1336: config.h is unchanged
-config.status:1384: executing depfiles commands
-config.status:1384: executing libtool commands
+config.status:1152: creating Makefile
+config.status:1152: creating opus.pc
+config.status:1152: creating opus-uninstalled.pc
+config.status:1152: creating celt/arm/armopts.s
+config.status:1152: creating doc/Makefile
+config.status:1152: creating doc/Doxyfile
+config.status:1152: creating config.h
+config.status:1333: config.h is unchanged
+config.status:1381: executing depfiles commands
+config.status:1381: executing libtool commands
 configure:17055:
 ------------------------------------------------------------------------
   opus 1.1.3:  Automatic configuration OK.
@@ -709,8 +889,8 @@ ac_cv_env_CCASFLAGS_set=
 ac_cv_env_CCASFLAGS_value=
 ac_cv_env_CCAS_set=
 ac_cv_env_CCAS_value=
-ac_cv_env_CC_set=
-ac_cv_env_CC_value=
+ac_cv_env_CC_set=set
+ac_cv_env_CC_value=arm-linux-gnueabihf-gcc
 ac_cv_env_CFLAGS_set=set
 ac_cv_env_CFLAGS_value=-fPIC
 ac_cv_env_CPPFLAGS_set=
@@ -771,7 +951,7 @@ ac_cv_prog_RANLIB=arm-linux-gnueabihf-ranlib
 ac_cv_prog_STRIP=arm-linux-gnueabihf-strip
 ac_cv_prog_ac_ct_MANIFEST_TOOL=mt
 ac_cv_prog_cc_c89=
-ac_cv_prog_cc_c99=
+ac_cv_prog_cc_c99=-std=gnu99
 ac_cv_prog_cc_g=yes
 ac_cv_prog_make_make_set=yes
 am_cv_CCAS_dependencies_compiler_type=gcc3
@@ -779,14 +959,13 @@ am_cv_CC_dependencies_compiler_type=gcc3
 am_cv_make_support_nested_variables=yes
 am_cv_prog_cc_c_o=yes
 lt_cv_ar_at_file=@
-lt_cv_archive_cmds_need_lc=no
 lt_cv_deplibs_check_method=pass_all
 lt_cv_file_magic_cmd='$MAGIC_CMD'
 lt_cv_file_magic_test_file=
 lt_cv_ld_reload_flag=-r
 lt_cv_nm_interface='BSD nm'
 lt_cv_objdir=.libs
-lt_cv_path_LD=/usr/arm-linux-gnueabihf/bin/ld
+lt_cv_path_LD=/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/bin/ld
 lt_cv_path_NM='/usr/bin/arm-linux-gnueabihf-nm -B'
 lt_cv_path_mainfest_tool=no
 lt_cv_prog_compiler_c_o=yes
@@ -794,7 +973,7 @@ lt_cv_prog_compiler_pic='-fPIC -DPIC'
 lt_cv_prog_compiler_pic_works=yes
 lt_cv_prog_compiler_rtti_exceptions=no
 lt_cv_prog_compiler_static_works=yes
-lt_cv_prog_gnu_ld=yes
+lt_cv_prog_gnu_ld=no
 lt_cv_sharedlib_from_linklib_cmd='printf %s\n'
 lt_cv_shlibpath_overrides_runpath=no
 lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[	 ][	 ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''
@@ -827,8 +1006,8 @@ AUTOCONF='${SHELL} /home/max/src/ubuntuApps/Cacophony/backend/opus/missing autoc
 AUTOHEADER='${SHELL} /home/max/src/ubuntuApps/Cacophony/backend/opus/missing autoheader'
 AUTOMAKE='${SHELL} /home/max/src/ubuntuApps/Cacophony/backend/opus/missing automake-1.15'
 AWK='gawk'
-CC='arm-linux-gnueabihf-gcc'
-CCAS='arm-linux-gnueabihf-gcc'
+CC='arm-linux-gnueabihf-gcc -std=gnu99'
+CCAS='arm-linux-gnueabihf-gcc -std=gnu99'
 CCASDEPMODE='depmode=gcc3'
 CCASFLAGS='-fPIC'
 CCDEPMODE='depmode=gcc3'
@@ -879,7 +1058,7 @@ INSTALL_DATA='${INSTALL} -m 644'
 INSTALL_PROGRAM='${INSTALL}'
 INSTALL_SCRIPT='${INSTALL}'
 INSTALL_STRIP_PROGRAM='$(install_sh) -c -s'
-LD='/usr/arm-linux-gnueabihf/bin/ld'
+LD='/var/lib/schroot/chroots/click-ubuntu-sdk-15.04-armhf/usr/arm-linux-gnueabihf/bin/ld'
 LDFLAGS=''
 LIBM='-lm'
 LIBOBJS=''

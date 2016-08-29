@@ -1,7 +1,7 @@
 src/mlp_data.lo: src/mlp_data.c \
  /usr/arm-linux-gnueabihf/include/stdc-predef.h config.h src/mlp.h \
  celt/arch.h opus_types.h \
- /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/stdint.h \
  /usr/arm-linux-gnueabihf/include/features.h \
  /usr/arm-linux-gnueabihf/include/sys/cdefs.h \
@@ -21,7 +21,7 @@ celt/arch.h:
 
 opus_types.h:
 
-/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stdint.h:
+/usr/lib/gcc-cross/arm-linux-gnueabihf/4.9/include/stdint.h:
 
 /usr/arm-linux-gnueabihf/include/stdint.h:
 

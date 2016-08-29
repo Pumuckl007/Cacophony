@@ -2,6 +2,7 @@ import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import QtQuick.LocalStorage 2.0
 import "DiscordInterface.js" as Discord
 
 import Cacophony 1.0 as Cacophony
@@ -53,6 +54,65 @@ MainView {
         }
     }
 
+    Component {
+        id: dialog
+        Dialog {
+            id: dialogue
+            title: "Login"
+            text: ""
+            TextField{
+                id:username
+                focus: true
+                placeholderText: i18n.tr("Username/Token");
+            }
+            TextField{
+                id:password
+                echoMode: TextInput.Password
+                placeholderText: i18n.tr("Password");
+                focus: true
+            }
+            Button {
+                id:login
+                text: "Login"
+                color:UbuntuColors.green
+                onClicked: {
+                    if(discord().login(username.text, password.text) >= 0){
+                        username.visible = false;
+                        password.text = "";
+                        password.visible = false;
+                        login.visible = false;
+                        activityIndicator.visible = true;
+                        activityIndicator.running = true;
+                    } else {
+                        dialogue.text = i18n.tr("Invalid username, password, or token.");
+                        password.text = "";
+                    }
+                }
+            }
+            ActivityIndicator {
+                    id: activityIndicator
+                    running: false
+                    visible:false
+            }
+            Component.onCompleted: {
+                var popUtil = PopupUtils;
+                Discord.addEventListener(Discord.BAD_LOGIN, function(){
+                    dialogue.text = i18n.tr("Invalid username, password, or token.");
+                    username.visible = true;
+                    password.visible = true;
+                    login.visible = true;
+                    activityIndicator.visible = false;
+                    activityIndicator.running = false;
+                });
+                Discord.addEventListener(Discord.LOGIN_SUCCESSFUL, function(){
+                    activityIndicator.visible = false;
+                    activityIndicator.running = false;
+                    popUtil.close(dialogue);
+                });
+            }
+        }
+    }
+
     function discord(){
         return Discord
     }
@@ -61,24 +121,11 @@ MainView {
         PopupUtils.open(dialog);
     }
 
-    Timer{
-        id: timerDebug
-        interval: 4000;
-        repeat: false;
-        onTriggered: {
-            voiceConnection.writePackets();
-        }
-        running: false;
-    }
-
     Component.onCompleted: {
-        //myType.encodeDecodeTest();
-        //voiceConnection.ssrc = 10;
-        //voiceConnection.port= 39338;
-        //voiceConnection.url = "example.com";
         Discord.init(mainView, voiceConnection);
-        //voiceConnection.decodeTest();
-        //Discord.addEventListener(Discord.CHANGE_CHANNEL, done);
+        var db = LocalStorage.openDatabaseSync("cacophony", "0.1", "Cacheing/Saving", 100000);
+        Discord.setDB(db)
+        done();
     }
 }
 
